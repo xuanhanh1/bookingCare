@@ -3,6 +3,8 @@ import actionTypes from './actionTypes';
 export const addUserSuccess = () => ({
     type: actionTypes.ADD_USER_SUCCESS
 })
+
+//login user success
 export const userLoginSuccess = (userInfo) => ({
     type: actionTypes.USER_LOGIN_SUCCESS,
     userInfo: userInfo
@@ -13,5 +15,15 @@ export const userLoginFail = () => ({
 })
 export const processLogout = () => ({
     type: actionTypes.PROCESS_LOGOUT,
+
+})
+
+//create user success 
+export const userLoginSuccess = (userInfo) => ({
+    type: actionTypes.CREATE_USER_SUCCESS,
+    userInfo: userInfo
+})
+export const userLoginFail = () => ({
+    type: actionTypes.CREATE_USER_FAIL,
 
 })

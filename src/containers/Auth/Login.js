@@ -71,7 +71,7 @@ class Login extends Component {
         return (
             <div>
                 <img className="wave" src={background} />
-                <div className="container">
+                <div className="container-login">
                     <div className="img">
                         <img src={loginbackground} />
                     </div>
