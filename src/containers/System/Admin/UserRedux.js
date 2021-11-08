@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import * as actions from '../../../store/actions/adminAction'
 class UserRedux extends Component {
 
     constructor(props) {
@@ -14,8 +15,8 @@ class UserRedux extends Component {
             phoneNumber: '',
             address: '',
             gender: '',
-            position: '',
-            role: '',
+            positionId: '',
+            roleId: '',
             image: '',
         }
     }
@@ -27,14 +28,28 @@ class UserRedux extends Component {
 
     onCreateUser = (event) => {
         event.preventDefault();
-        console.log('check state when create user', this.state)
+        // console.log('check state when create user', this.state)
         let isValid = this.onCheckValidity();
         if (isValid === false) return;
+
+        this.props.createNewUser({
+            email: this.state.email,
+            password: this.state.password,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            address: this.state.address,
+            phoneNumber: this.state.phoneNumber,
+            gender: this.state.gender,
+            //image: this.stateTypes.STRING,
+            //chưa thực hiện upload anh
+            roleId: this.state.roleId,
+            positionId: this.state.positionId,
+        })
 
     }
     onCheckValidity = () => {
         let isValid = true;
-        let checkArr = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'gender', 'position', 'role'];
+        let checkArr = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'gender', 'positionId', 'roleId'];
         for (let i = 0; i < checkArr.length; i++) {
             if (!this.state[checkArr[i]]) {
                 isValid = false;
@@ -117,14 +132,14 @@ class UserRedux extends Component {
                                 onChange={(event) => { this.onChangeInput(event, 'gender') }}
                             >
                                 <option selected>Choose...</option>
-                                <option value="male" >Nam</option>
-                                <option value="female" >Nữ</option>
+                                <option value={0} >Nam</option>
+                                <option value={1} >Nữ</option>
                             </select>
                         </div>
                         <div className="form-group col-md-2">
                             <label htmlFor="inputState">Chức danh</label>
                             <select id="inputState" className="form-control"
-                                onChange={(event) => { this.onChangeInput(event, 'position') }}
+                                onChange={(event) => { this.onChangeInput(event, 'positionId') }}
                             >
                                 <option selected>Choose...</option>
                                 <option value="Dr">Tiến sĩ</option>
@@ -136,7 +151,7 @@ class UserRedux extends Component {
                         <div className="form-group col-md-2">
                             <label htmlFor="inputState">Vai trò</label>
                             <select id="inputState" className="form-control"
-                                onChange={(event) => { this.onChangeInput(event, 'role') }}
+                                onChange={(event) => { this.onChangeInput(event, 'roleId') }}
                             >
                                 <option selected>Choose...</option>
                                 <option value="R0">Admin</option>
@@ -170,6 +185,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        createNewUser: (data) => dispatch(actions.createNewUser(data))
     };
 };
 
