@@ -132,8 +132,8 @@ class UserRedux extends Component {
                                 onChange={(event) => { this.onChangeInput(event, 'gender') }}
                             >
                                 <option selected>Choose...</option>
-                                <option value={0} >Nam</option>
-                                <option value={1} >Nữ</option>
+                                <option value={1} >Nam</option>
+                                <option value={0} >Nữ</option>
                             </select>
                         </div>
                         <div className="form-group col-md-2">
