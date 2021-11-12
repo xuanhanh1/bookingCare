@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/adminAction'
+import UsersTable from './UsersTable'
 class UserRedux extends Component {
 
     constructor(props) {
@@ -18,16 +19,35 @@ class UserRedux extends Component {
             positionId: '',
             roleId: '',
             image: '',
+
+
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
 
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.users !== this.props.users) {
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                address: '',
+                gender: '',
+                positionId: '',
+                roleId: '',
+                image: '',
+            })
+        }
+    }
 
-    onCreateUser = (event) => {
-        event.preventDefault();
+
+    onCreateUser = () => {
+        // event.preventDefault();
         // console.log('check state when create user', this.state)
         let isValid = this.onCheckValidity();
         if (isValid === false) return;
@@ -45,7 +65,9 @@ class UserRedux extends Component {
             roleId: this.state.roleId,
             positionId: this.state.positionId,
         })
-
+        setTimeout(() => {
+            this.props.getAllUsers()
+        }, 1000);
     }
     onCheckValidity = () => {
         let isValid = true;
@@ -75,103 +97,106 @@ class UserRedux extends Component {
                     Thêm mới bác sĩ
                 </h3>
 
-                <form className="">
-                    <div className="form-row">
-                        <div className="form-group col-md-6">
-                            <label htmlFor="inputEmail4">Email</label>
-                            <input type="email" className="form-control"
-                                id="inputEmail4" placeholder="Email"
-                                value={email}
-                                onChange={(event) => { this.onChangeInput(event, 'email') }}
-                            />
-                        </div>
-                        <div className="form-group col-md-6">
-                            <label htmlFor="inputPassword4">Password</label>
-                            <input type="password" className="form-control"
-                                id="inputPassword4" placeholder="Password"
-                                value={password}
-                                onChange={(event) => { this.onChangeInput(event, 'password') }}
-                            />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="inputAddress">Họ</label>
-                        <input type="text" className="form-control"
-                            id="inputAddress" placeholder="Nguyễn "
-                            value={firstName}
-                            onChange={(event) => { this.onChangeInput(event, 'firstName') }}
+
+                <div className="form-row">
+                    <div className="form-group col-md-6">
+                        <label htmlFor="inputEmail4">Email</label>
+                        <input type="email" className="form-control"
+                            id="inputEmail4" placeholder="Email"
+                            value={email}
+                            onChange={(event) => { this.onChangeInput(event, 'email') }}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputAddress2">Tên</label>
-                        <input type="text" className="form-control"
-                            id="inputAddress2" placeholder="Văn A"
-                            value={lastName}
-                            onChange={(event) => { this.onChangeInput(event, 'lastName') }}
+                    <div className="form-group col-md-6">
+                        <label htmlFor="inputPassword4">Password</label>
+                        <input type="password" className="form-control"
+                            id="inputPassword4" placeholder="Password"
+                            value={password}
+                            onChange={(event) => { this.onChangeInput(event, 'password') }}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputAddress2">Địa chỉ</label>
-                        <input type="text" className="form-control"
-                            id="inputAddress2" placeholder="Thành phố Hồ Chí Minh"
-                            value={address}
-                            onChange={(event) => { this.onChangeInput(event, 'address') }}
+                </div>
+                <div className="form-group">
+                    <label htmlFor="inputAddress">Họ</label>
+                    <input type="text" className="form-control"
+                        id="inputAddress" placeholder="Nguyễn "
+                        value={firstName}
+                        onChange={(event) => { this.onChangeInput(event, 'firstName') }}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="inputAddress2">Tên</label>
+                    <input type="text" className="form-control"
+                        id="inputAddress2" placeholder="Văn A"
+                        value={lastName}
+                        onChange={(event) => { this.onChangeInput(event, 'lastName') }}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="inputAddress2">Địa chỉ</label>
+                    <input type="text" className="form-control"
+                        id="inputAddress2" placeholder="Thành phố Hồ Chí Minh"
+                        value={address}
+                        onChange={(event) => { this.onChangeInput(event, 'address') }}
+                    />
+                </div>
+                <div className="form-row">
+                    <div className="form-group col-md-6">
+                        <label htmlFor="inputCity">Số điện thoại</label>
+                        <input type="text" className="form-control" id="inputCity"
+                            value={phoneNumber}
+                            onChange={(event) => { this.onChangeInput(event, 'phoneNumber') }}
                         />
                     </div>
-                    <div className="form-row">
-                        <div className="form-group col-md-6">
-                            <label htmlFor="inputCity">Số điện thoại</label>
-                            <input type="text" className="form-control" id="inputCity"
-                                value={phoneNumber}
-                                onChange={(event) => { this.onChangeInput(event, 'phoneNumber') }}
-                            />
-                        </div>
-                        <div className="form-group col-md-2">
-                            <label htmlFor="inputState">Giới tính</label>
-                            <select id="inputState" className="form-control"
-                                onChange={(event) => { this.onChangeInput(event, 'gender') }}
-                            >
-                                <option selected>Choose...</option>
-                                <option value={1} >Nam</option>
-                                <option value={0} >Nữ</option>
-                            </select>
-                        </div>
-                        <div className="form-group col-md-2">
-                            <label htmlFor="inputState">Chức danh</label>
-                            <select id="inputState" className="form-control"
-                                onChange={(event) => { this.onChangeInput(event, 'positionId') }}
-                            >
-                                <option selected>Choose...</option>
-                                <option value="Dr">Tiến sĩ</option>
-                                <option value="professor">Giáo sư</option>
-                                <option value="Master">Thạc sĩ</option>
-                                <option value="Associate Professor">Phó giáo sư</option>
-                            </select>
-                        </div>
-                        <div className="form-group col-md-2">
-                            <label htmlFor="inputState">Vai trò</label>
-                            <select id="inputState" className="form-control"
-                                onChange={(event) => { this.onChangeInput(event, 'roleId') }}
-                            >
-                                <option selected>Choose...</option>
-                                <option value="R0">Admin</option>
-                                <option value="R1">Bác sĩ</option>
-                                <option value="R2">Bệnh nhân</option>
-                            </select>
-                        </div>
-
+                    <div className="form-group col-md-2">
+                        <label htmlFor="inputState">Giới tính</label>
+                        <select id="inputState" className="form-control"
+                            onChange={(event) => { this.onChangeInput(event, 'gender') }}
+                        >
+                            <option selected>Choose...</option>
+                            <option value={1} >Nam</option>
+                            <option value={0} >Nữ</option>
+                        </select>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleFormControlFile1">Ảnh Đại diện</label>
-                        <input type="file" className="form-control-file" id="exampleFormControlFile1" />
+                    <div className="form-group col-md-2">
+                        <label htmlFor="inputState">Chức danh</label>
+                        <select id="inputState" className="form-control"
+                            onChange={(event) => { this.onChangeInput(event, 'positionId') }}
+                        >
+                            <option selected>Choose...</option>
+                            <option value="Dr">Tiến sĩ</option>
+                            <option value="professor">Giáo sư</option>
+                            <option value="Master">Thạc sĩ</option>
+                            <option value="Associate Professor">Phó giáo sư</option>
+                        </select>
+                    </div>
+                    <div className="form-group col-md-2">
+                        <label htmlFor="inputState">Vai trò</label>
+                        <select id="inputState" className="form-control"
+                            onChange={(event) => { this.onChangeInput(event, 'roleId') }}
+                        >
+                            <option selected>Choose...</option>
+                            <option value="R0">Admin</option>
+                            <option value="R1">Bác sĩ</option>
+                            <option value="R2">Bệnh nhân</option>
+                        </select>
                     </div>
 
+                </div>
+                <div className="form-group">
+                    <label htmlFor="exampleFormControlFile1">Ảnh Đại diện</label>
+                    <input type="file" className="form-control-file" id="exampleFormControlFile1" />
+                </div>
 
-                    <button type="submit" className="btn btn-primary"
-                        onClick={(event) => this.onCreateUser(event)}
-                    >Đăng ký</button>
-                </form>
 
+                <button type="submit" className="btn btn-primary"
+                    onClick={() => this.onCreateUser()}
+                >Đăng ký</button>
+
+
+                <UsersTable />
+
+                <div style={{ height: '100px' }}></div>
             </div>
         );
     }
@@ -180,12 +205,15 @@ class UserRedux extends Component {
 
 const mapStateToProps = state => {
     return {
+        users: state.admin.users
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        createNewUser: (data) => dispatch(actions.createNewUser(data))
+        createNewUser: (data) => dispatch(actions.createNewUser(data)),
+        getAllUsers: () => dispatch(actions.getAllUsers())
+
     };
 };
 
