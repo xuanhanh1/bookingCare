@@ -31,6 +31,11 @@ class UsersTable extends Component {
         console.log(user)
         this.props.deleteUsers(user.id)
     }
+
+    editUsers = (user) => {
+        console.log(user)
+        this.props.editUser(user)
+    }
     render() {
         let { users } = this.state
         return (
@@ -53,14 +58,14 @@ class UsersTable extends Component {
                             {users.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <th scope="row">{item.id}</th>
+                                        <th scope="row">{index}</th>
                                         <td>{item.email}</td>
                                         <td>{item.firstName}</td>
                                         <td>{item.lastName}</td>
                                         <td>{item.address}</td>
                                         <td>
                                             <i className="fas fa-edit"
-
+                                                onClick={() => this.editUsers(item)}
                                             ></i>
                                             <i className="fas fa-trash-alt"
                                                 onClick={() => this.deleteUsers(item)}

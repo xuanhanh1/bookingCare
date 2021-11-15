@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/adminAction'
 import UsersTable from './UsersTable'
+import { CRUD_ACTION } from '../../../utils/constant'
 class UserRedux extends Component {
 
     constructor(props) {
@@ -19,8 +20,9 @@ class UserRedux extends Component {
             positionId: '',
             roleId: '',
             image: '',
+            userEditId: '',
 
-
+            action: '',
         }
     }
 
@@ -41,6 +43,8 @@ class UserRedux extends Component {
                 positionId: '',
                 roleId: '',
                 image: '',
+
+                action: CRUD_ACTION.CREATE,
             })
         }
     }
@@ -51,23 +55,46 @@ class UserRedux extends Component {
         // console.log('check state when create user', this.state)
         let isValid = this.onCheckValidity();
         if (isValid === false) return;
+        let { action } = this.state;
 
-        this.props.createNewUser({
-            email: this.state.email,
-            password: this.state.password,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            address: this.state.address,
-            phoneNumber: this.state.phoneNumber,
-            gender: this.state.gender,
-            //image: this.stateTypes.STRING,
-            //chưa thực hiện upload anh
-            roleId: this.state.roleId,
-            positionId: this.state.positionId,
-        })
-        setTimeout(() => {
-            this.props.getAllUsers()
-        }, 1000);
+        if (action === CRUD_ACTION.CREATE) {
+            this.props.createNewUser({
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                address: this.state.address,
+                phoneNumber: this.state.phoneNumber,
+                gender: this.state.gender,
+                //image: this.stateTypes.STRING,
+                //chưa thực hiện upload anh
+                roleId: this.state.roleId,
+                positionId: this.state.positionId,
+            })
+            setTimeout(() => {
+                this.props.getAllUsers()
+            }, 1000);
+        }
+
+        if (action === CRUD_ACTION.EDIT) {
+            this.props.editAUser({
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                address: this.state.address,
+                phoneNumber: this.state.phoneNumber,
+                gender: this.state.gender,
+                //image: this.stateTypes.STRING,
+                //chưa thực hiện upload anh
+                roleId: this.state.roleId,
+                positionId: this.state.positionId,
+            })
+            setTimeout(() => {
+                this.props.getAllUsers()
+            }, 1000);
+        }
+
     }
     onCheckValidity = () => {
         let isValid = true;
@@ -81,7 +108,6 @@ class UserRedux extends Component {
         }
         return isValid;
     }
-
     onChangeInput = (event, id) => {
         let copyState = { ...this.state };
         copyState[id] = event.target.value;
@@ -89,8 +115,34 @@ class UserRedux extends Component {
             ...copyState
         });
     }
+    editUser = (user) => {
+
+        this.setState({
+            email: user.email,
+            password: user.password,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
+            address: user.address,
+            gender: user.gender,
+            positionId: user.positionId,
+            roleId: user.roleId,
+            image: '',
+            userEditId: user.id,
+
+
+            action: CRUD_ACTION.EDIT,
+        })
+
+
+
+
+
+    }
+
     render() {
-        let { email, password, firstName, lastName, phoneNumber, address } = this.state;
+        let { email, password, firstName, lastName, phoneNumber, address,
+            gender, positionId, roleId, action, } = this.state;
         return (
             <div className="container">
                 <h3 className="mt-3">
@@ -152,6 +204,7 @@ class UserRedux extends Component {
                         <label htmlFor="inputState">Giới tính</label>
                         <select id="inputState" className="form-control"
                             onChange={(event) => { this.onChangeInput(event, 'gender') }}
+                            value={gender}
                         >
                             <option selected>Choose...</option>
                             <option value={1} >Nam</option>
@@ -174,6 +227,7 @@ class UserRedux extends Component {
                         <label htmlFor="inputState">Vai trò</label>
                         <select id="inputState" className="form-control"
                             onChange={(event) => { this.onChangeInput(event, 'roleId') }}
+                            value={roleId}
                         >
                             <option selected>Choose...</option>
                             <option value="R0">Admin</option>
@@ -189,12 +243,14 @@ class UserRedux extends Component {
                 </div>
 
 
-                <button type="submit" className="btn btn-primary"
+                <button type="submit" className={action === CRUD_ACTION.EDIT ? "btn btn-warning" : "btn btn-primary"}
                     onClick={() => this.onCreateUser()}
-                >Đăng ký</button>
+                >{action === CRUD_ACTION.EDIT ? "Lưu lại" : "Đăng ký"}</button>
 
 
-                <UsersTable />
+                <UsersTable
+                    editUser={this.editUser}
+                />
 
                 <div style={{ height: '100px' }}></div>
             </div>
@@ -212,7 +268,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         createNewUser: (data) => dispatch(actions.createNewUser(data)),
-        getAllUsers: () => dispatch(actions.getAllUsers())
+        getAllUsers: () => dispatch(actions.getAllUsers()),
+        editAUser: (id) => dispatch(actions.editAUser(id))
 
     };
 };

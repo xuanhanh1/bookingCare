@@ -1,5 +1,8 @@
 import actionTypes from './actionTypes';
-import { createNewUserService, getAllUsersService, deleteUserService } from '../../services/userService'
+import {
+    createNewUserService, getAllUsersService, deleteUserService,
+    editUserService
+} from '../../services/userService'
 
 export const addUserSuccess = () => ({
     type: actionTypes.ADD_USER_SUCCESS
@@ -80,5 +83,31 @@ export const deleteUserSuccess = (id) => ({
 })
 export const deleteUserFail = () => ({
     type: actionTypes.DELETE_USER_FAIL,
+
+})
+
+//edit user success 
+export const editAUser = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await editUserService(data);
+            if (res && res.errCode === 0) {
+                dispatch(userEditSuccess())
+                dispatch(getAllUsers());
+            } else {
+                dispatch(userEditFail())
+            }
+        } catch (e) {
+            dispatch(userEditFail())
+            console.log('create user failed ' + e)
+        }
+    }
+}
+export const userEditSuccess = (id) => ({
+    type: actionTypes.EDIT_USER_SUCCESS,
+    users: id
+})
+export const userEditFail = () => ({
+    type: actionTypes.EDIT_USER_FAIL,
 
 })
