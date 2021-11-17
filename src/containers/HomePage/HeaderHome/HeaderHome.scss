@@ -1,0 +1,114 @@
+
+    .navbar{
+        width: 1170px;
+        position: sticky;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        height: 75px;
+        top: 0;
+        background-color: white;
+        z-index: 10000;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+     
+
+        .logo{
+            display: flex;
+            align-items: center;
+            height: 75px;
+        }
+
+        .content{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+
+            &_children{
+                font-size: 11px;
+                margin-top: 8px;
+                align-items: center;
+
+                p{
+                    margin-bottom: 2px;
+                }
+            }
+        }
+        .login{
+            text-align: right;
+
+        }
+    }
+.header{
+
+    .contenthead{
+        background-image: url(../../../assets/images/bookingcare-cover-4.jpg);
+        background-repeat: no-repeat center;
+        background-size: cover;
+        height: 85vh;
+
+        &_up{
+            border: 0.1px solid rgb(255, 255, 255);
+            position: relative;
+            height: 50%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.25),rgba(255, 255, 255, 0.1));
+            &_ct{
+                text-align: center;
+                h1{
+                    font-weight: 700;
+                    margin-top: 62px;
+                    margin-bottom: 20px;
+                }
+                h4{
+                    color: blue;
+                }
+            }
+
+            &_search{
+                position: absolute;
+                bottom: 0;
+                right: 32%;
+                text-align: center;
+                input{
+                    border-radius: 40px;
+                    font-size: 14px;
+                    padding: 15px;
+                    width: 500px;
+                }
+                i{
+                    position: absolute;
+                    top: 14px;
+                    right: 26px;
+                    font-size: 25px;
+                }
+            }
+        }
+        &_down{
+            height: 50%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            align-items: end;
+            gap: 100px;
+            padding: 0px 218px;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.1),rgba(255, 255, 255, 0.9),rgba(255, 255, 255, 1));
+
+            &_icon{
+
+                text-align: center;
+                margin-bottom: 15px;
+
+                i{
+                    display: block;
+                    margin-bottom: 14px;
+                    font-size: 36px;
+                }
+            }
+
+        }
+    }
+}
+img {
+    width: 50px;
+}

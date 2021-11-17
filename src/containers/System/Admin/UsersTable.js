@@ -19,7 +19,7 @@ class UsersTable extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(prevProps)
+        // console.log(prevProps)
         if (prevProps.users !== this.props.users) {
             this.setState({
                 users: this.props.users
@@ -28,12 +28,12 @@ class UsersTable extends Component {
     }
 
     deleteUsers = (user) => {
-        console.log(user)
+
         this.props.deleteUsers(user.id)
     }
 
     editUsers = (user) => {
-        console.log(user)
+        // console.log(user)
         this.props.editUser(user)
     }
     render() {

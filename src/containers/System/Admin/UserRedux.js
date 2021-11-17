@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import * as actions from '../../../store/actions/adminAction'
-import UsersTable from './UsersTable'
-import { CRUD_ACTION } from '../../../utils/constant'
+import * as actions from '../../../store/actions/adminAction';
+import UsersTable from './UsersTable';
+import { CRUD_ACTION } from '../../../utils/constant';
+import CommonUtils from '../../../utils/CommonUtils';
 class UserRedux extends Component {
 
     constructor(props) {
@@ -19,7 +20,8 @@ class UserRedux extends Component {
             gender: '',
             positionId: '',
             roleId: '',
-            image: '',
+            avatar: '',
+            previewUrl: '',
             userEditId: '',
 
             action: '',
@@ -42,7 +44,7 @@ class UserRedux extends Component {
                 gender: '',
                 positionId: '',
                 roleId: '',
-                image: '',
+                avatar: '',
 
                 action: CRUD_ACTION.CREATE,
             })
@@ -66,7 +68,7 @@ class UserRedux extends Component {
                 address: this.state.address,
                 phoneNumber: this.state.phoneNumber,
                 gender: this.state.gender,
-                //image: this.stateTypes.STRING,
+                avatar: this.state.avatar,
                 //chưa thực hiện upload anh
                 roleId: this.state.roleId,
                 positionId: this.state.positionId,
@@ -85,7 +87,7 @@ class UserRedux extends Component {
                 address: this.state.address,
                 phoneNumber: this.state.phoneNumber,
                 gender: this.state.gender,
-                //image: this.stateTypes.STRING,
+                //avatar: this.stateTypes.STRING,
                 //chưa thực hiện upload anh
                 roleId: this.state.roleId,
                 positionId: this.state.positionId,
@@ -127,22 +129,32 @@ class UserRedux extends Component {
             gender: user.gender,
             positionId: user.positionId,
             roleId: user.roleId,
-            image: '',
+            avatar: user.avatar,
             userEditId: user.id,
-
-
             action: CRUD_ACTION.EDIT,
         })
+    }
 
-
-
-
-
+    onChangeImage = async (event) => {
+        let data = event.target.files;
+        // console.log(data)
+        let file = data[0];
+        // console.log(file)
+        if (file) {
+            let base64 = await CommonUtils.getBase64(file);
+            // console.log(base64);
+            let objectURL = URL.createObjectURL(file);
+            console.log(objectURL)
+            this.setState({
+                previewUrl: objectURL,
+                avatar: base64,
+            })
+        }
     }
 
     render() {
         let { email, password, firstName, lastName, phoneNumber, address,
-            gender, positionId, roleId, action, } = this.state;
+            gender, positionId, roleId, action, avatar } = this.state;
         return (
             <div className="container">
                 <h3 className="mt-3">
@@ -207,20 +219,21 @@ class UserRedux extends Component {
                             value={gender}
                         >
                             <option selected>Choose...</option>
-                            <option value={1} >Nam</option>
-                            <option value={0} >Nữ</option>
+                            <option value="M" >Nam</option>
+                            <option value="F" >Nữ</option>
                         </select>
                     </div>
                     <div className="form-group col-md-2">
                         <label htmlFor="inputState">Chức danh</label>
                         <select id="inputState" className="form-control"
                             onChange={(event) => { this.onChangeInput(event, 'positionId') }}
+                            value={positionId}
                         >
                             <option selected>Choose...</option>
-                            <option value="Dr">Tiến sĩ</option>
-                            <option value="professor">Giáo sư</option>
-                            <option value="Master">Thạc sĩ</option>
-                            <option value="Associate Professor">Phó giáo sư</option>
+                            <option value="P2">Tiến sĩ</option>
+                            <option value="P1">Thạc sĩ</option>
+                            <option value="P3">Phó giáo sư</option>
+                            <option value="P4">Giáo sư</option>
                         </select>
                     </div>
                     <div className="form-group col-md-2">
@@ -230,16 +243,19 @@ class UserRedux extends Component {
                             value={roleId}
                         >
                             <option selected>Choose...</option>
-                            <option value="R0">Admin</option>
-                            <option value="R1">Bác sĩ</option>
-                            <option value="R2">Bệnh nhân</option>
+                            <option value="R1">Admin</option>
+                            <option value="R2">Bác sĩ</option>
+                            <option value="R3">Bệnh nhân</option>
                         </select>
                     </div>
 
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlFile1">Ảnh Đại diện</label>
-                    <input type="file" className="form-control-file" id="exampleFormControlFile1" />
+                    <input type="file" className="form-control-file" id="exampleFormControlFile1"
+                        onChange={(event) => { this.onChangeImage(event) }}
+                    // value={avatar}
+                    />
                 </div>
 
 

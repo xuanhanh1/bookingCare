@@ -1,7 +1,7 @@
 import actionTypes from './actionTypes';
 import {
     createNewUserService, getAllUsersService, deleteUserService,
-    editUserService
+    editUserService, getTopDocterHomeService
 } from '../../services/userService'
 
 export const addUserSuccess = () => ({
@@ -12,6 +12,7 @@ export const addUserSuccess = () => ({
 export const createNewUser = (data) => {
     return async (dispatch, getState) => {
         try {
+            console.log(data)
             let res = await createNewUserService(data);
             if (res && res.errCode === 0) {
                 dispatch(userCreateSuccess())
@@ -109,5 +110,32 @@ export const userEditSuccess = (id) => ({
 })
 export const userEditFail = () => ({
     type: actionTypes.EDIT_USER_FAIL,
+
+})
+
+//get top doctor info
+export const getTopDoctor = () => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await getTopDocterHomeService('6');
+            console.log('top doctor', res)
+            if (res && res.errCode === 0) {
+                dispatch(getTopDoctorsSuccess(res.data))
+            } else {
+                dispatch(getTopDoctorFail())
+            }
+        } catch (e) {
+            dispatch(getTopDoctorFail())
+            console.log('get top doctor failed ' + e)
+        }
+    }
+}
+export const getTopDoctorsSuccess = (data) => ({
+    type: actionTypes.GET_TOP_DOCTORS_SUCCESS,
+    dataDoctors: data
+})
+export const getTopDoctorFail = () => ({
+    type: actionTypes.GET_TOP_DOCTORS_FAIL,
 
 })

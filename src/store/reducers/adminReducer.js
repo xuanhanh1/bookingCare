@@ -3,7 +3,8 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     isLoggedIn: false,
     adminInfo: null,
-    users: []
+    users: [],
+    topDoctors: [],
 }
 
 const appReducer = (state = initialState, action) => {
@@ -39,6 +40,16 @@ const appReducer = (state = initialState, action) => {
             }
         case actionTypes.GET_ALL_USERS_FAIL:
             state.users = [];
+            return {
+                ...state,
+            }
+        case actionTypes.GET_TOP_DOCTORS_SUCCESS:
+            state.topDoctors = action.dataDoctors;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_TOP_DOCTORS_FAIL:
+            state.topDoctors = [];
             return {
                 ...state,
             }
