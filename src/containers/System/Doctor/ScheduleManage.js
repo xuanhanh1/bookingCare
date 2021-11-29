@@ -3,8 +3,12 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select';
+import { dateFormat } from '../../../utils';
 import * as actions from '../../../store/actions/adminAction';
 import DatePicker from '../../../components/Input/DatePicker';
+import { toast } from 'react-toastify';
+import _ from 'lodash';
+import moment from 'moment';
 import './ScheduleManage.scss'
 
 class ScheduleManage extends Component {
@@ -35,8 +39,12 @@ class ScheduleManage extends Component {
         }
         if (prevProps.allschedule !== this.props.allschedule) {
             // console.log(this.props.allschedule)
+            let data = this.props.allschedule;
+            if (data && data.length > 0) {
+                data = data.map(item => ({ ...item, isSelected: false }))
+            }
             this.setState({
-                scheduleTime: this.props.allschedule
+                scheduleTime: data
             })
         }
     }
@@ -64,8 +72,49 @@ class ScheduleManage extends Component {
             currentDate: date[0]
         })
     }
+    onHandleClickBtnTime = (time) => {
+        let { scheduleTime } = this.state;
+        if (scheduleTime && scheduleTime.length > 0) {
+            scheduleTime = scheduleTime.map(item => {
+                if (item.id === time.id) item.isSelected = !item.isSelected;
+                return item;
+
+            })
+            this.setState({
+                scheduleTime: scheduleTime
+            })
+        }
+    }
     saveSchedule = () => {
-        console.log('Saving schedule state', this.state)
+        // console.log('Saving schedule state', this.state)
+        let { scheduleTime, currentDate, selectedOption } = this.state
+        let result = [];
+        if (!currentDate) {
+            toast.error("not time date")
+        }
+        if (selectedOption && _.isEmpty(selectedOption)) {
+            toast.error("not chose doctor")
+        }
+        let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+
+        if (scheduleTime && scheduleTime.length > 0) {
+            let selectTime = scheduleTime.filter(item => item.isSelected === true)
+
+            if (selectTime && selectTime.length > 0) {
+                selectTime.map((item, i) => {
+                    let object = {};
+                    object.id = selectedOption.value;
+                    object.date = formatedDate;
+                    object.time = item.keyMap;
+                    result.push(object);
+                })
+
+            } else {
+                toast.error("not select time ");
+                return;
+            }
+        }
+        console.log('luu thong tin schedule time', result)
     }
 
     render() {
@@ -99,8 +148,11 @@ class ScheduleManage extends Component {
                     <div className="schedule-time">
                         {scheduleTime && scheduleTime.length > 0 &&
                             scheduleTime.map((item, i) => {
+                                // console.log(item)
                                 return (
-                                    <button key={i} className="">{item.valueEn}</button>
+                                    <button key={i} className={item.isSelected === true ? 'active' : ''}
+                                        onClick={() => this.onHandleClickBtnTime(item)}
+                                    >{item.valueEn}</button>
                                 )
                             })
                         }
@@ -108,7 +160,7 @@ class ScheduleManage extends Component {
                 </div>
                 <div className="container">
                     <button className="btn-save"
-                        onClick={this.saveSchedule}
+                        onClick={() => this.saveSchedule()}
                     >Lưu thông tin</button>
                 </div>
             </Fragment>
@@ -120,6 +172,7 @@ class ScheduleManage extends Component {
 const mapStateToProps = state => {
     return {
         allDoctors: state.admin.allDoctors,
+        isLoggedIn: state.user.isLoggedIn,
         allschedule: state.admin.schedule,
     };
 };

@@ -32,7 +32,7 @@ class Doctor extends Component {
     }
     handerViewDetailDoctor = (doctor) => {
         // console.log(doctor)
-        this.props.history.push(`/doctor/${doctor}`)
+        this.props.history.push(`/doctorDetail/${doctor}`)
 
     }
     render() {

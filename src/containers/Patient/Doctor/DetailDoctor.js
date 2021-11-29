@@ -5,7 +5,7 @@ import Navbar from '../../HomePage/HeaderHome/Navbar'
 import './DetailDoctor.scss'
 import { getAInfoDoctorService } from '../../../services/userService'
 
-class DerailDoctor extends Component {
+class DetailDoctor extends Component {
 
     constructor(props) {
         super(props);
@@ -89,4 +89,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DerailDoctor);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailDoctor);
