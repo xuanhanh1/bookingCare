@@ -1,0 +1,27 @@
+.manage-doctor{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    &-select{
+        width: 40%;
+    }
+    &-textarea{
+        width: 60%;
+
+        textarea{
+            width: 100%;
+        }
+    }
+    
+    &-btn{
+        margin-top: 20px;
+        background-color: #d19c0a;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 0.9;
+        }
+    }
+}

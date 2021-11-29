@@ -21,9 +21,29 @@ const editUserService = (userId) => {
 const getTopDocterHomeService = (limit) => {
     return axios.get(`/api/top-doctor-home?limit=${limit}`);
 }
+const getAllDoctorService = (inputId) => {
+    return axios.get(`/api/get-all-doctors?id=${inputId}`);
+}
+//get a informatiom of doctor by id
+const getAInfoDoctorService = (inputId) => {
+    return axios.get(`/api/get-all-info-detail-doctors?id=${inputId}`);
+}
+
+const createInfoDoctorService = (data) => {
+    // console.log('check data server ' + data);
+    alert('crate info doctor success');
+    return axios.post('/api/save-info-doctors', data);
+}
+
+const getAllCodeService = (inputType) => {
+    return axios.get(`/api/allcode?type=${inputType}`);
+}
+
 export {
     handleLoginApi, createNewUserService, getAllUsersService,
-    deleteUserService, editUserService, getTopDocterHomeService
+    deleteUserService, editUserService, getTopDocterHomeService,
+    getAllDoctorService, createInfoDoctorService, getAInfoDoctorService,
+    getAllCodeService
 }
 
 

@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import specialtyimg from '../../../assets/images/co-xuong-khop.jpg'
 import * as actions from '../../../store/actions/adminAction';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 class Doctor extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class Doctor extends Component {
 
         this.state = {
             topDoctors: [],
+            aDoctor: {},
         }
     }
 
@@ -21,13 +23,18 @@ class Doctor extends Component {
         this.props.getTopDoctor();
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
+        // console.log(prevProps)
         if (prevProps.topDoctors !== this.props.topDoctors) {
             this.setState({
                 topDoctors: this.props.topDoctors
             })
         }
     }
+    handerViewDetailDoctor = (doctor) => {
+        // console.log(doctor)
+        this.props.history.push(`/doctor/${doctor}`)
 
+    }
     render() {
         var settings = {
             infinite: false,
@@ -37,23 +44,26 @@ class Doctor extends Component {
         };
         // console.log('top doctor in doctor.js', this.state.topDoctors)
         let topDoctors = this.state.topDoctors;
+        // console.log(topDoctors)
         return (
-            <section className="specialty section">
-                <div className="section-header">
+            <section className="specialty sections" >
+                <div className="sections-header">
                     <h3>Bác sĩ nổi bật</h3>
                     <button>Xem Thêm</button>
                 </div>
-                <div className="section-content">
+                <div className="sections-content">
                     <Slider {...settings}>
                         {topDoctors.map((item, index) => {
                             let imageBase64 = '';
                             if (item.image) {
                                 imageBase64 = new Buffer(item.image, 'base64').toString('binary');
-                                console.log(imageBase64)
+                                // console.log(imageBase64)
                             }
                             console.log(item)
                             return (
-                                <div className="section-content-img doctor-img">
+                                <div className="sections-content-img doctor-img"
+                                    onClick={() => { this.handerViewDetailDoctor(item.id) }}
+                                >
                                     <img src={imageBase64}></img>
                                     <h3>Phó giáo sư tiến sĩ {item.lastName}</h3>
                                     <span>Co xuong khop</span>
@@ -71,15 +81,17 @@ class Doctor extends Component {
 
 const mapStateToProps = state => {
     return {
-        topDoctors: state.admin.topDoctors
+        topDoctors: state.admin.topDoctors,
+        aDoctor: state.admin.aDoctors
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getTopDoctor: () => dispatch(actions.getTopDoctor())
+        getTopDoctor: () => dispatch(actions.getTopDoctor()),
+
 
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Doctor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Doctor));

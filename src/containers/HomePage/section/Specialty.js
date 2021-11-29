@@ -9,40 +9,40 @@ import specialtyimg from '../../../assets/images/co-xuong-khop.jpg'
 class Specialty extends Component {
     render() {
         var settings = {
-            infinite: true,
+            infinite: false,
             speed: 500,
             slidesToShow: 4,
             slidesToScroll: 1
         };
         return (
-            <section className="specialty section">
-                <div className="section-header">
+            <section className="specialty sections">
+                <div className="sections-header">
                     <h3>Chuyên khoa phổ biến</h3>
                     <button>Xem Thêm</button>
                 </div>
-                <div className="section-content">
+                <div className="sections-content">
                     <Slider {...settings}>
-                        <div className="section-content-img">
+                        <div className="sections-content-img">
                             <img src={specialtyimg}></img>
                             <span>Co xuong khop</span>
                         </div>
-                        <div className="section-content-img">
+                        <div className="sections-content-img">
                             <img src={specialtyimg}></img>
                             <span>Co xuong khop</span>
                         </div>
-                        <div className="section-content-img">
+                        <div className="sections-content-img">
                             <img src={specialtyimg}></img>
                             <span>Co xuong khop</span>
                         </div>
-                        <div className="section-content-img">
+                        <div className="sections-content-img">
                             <img src={specialtyimg}></img>
                             <span>Co xuong khop</span>
                         </div>
-                        <div className="section-content-img">
+                        <div className="sections-content-img">
                             <img src={specialtyimg}></img>
                             <span>Co xuong khop</span>
                         </div>
-                        <div className="section-content-img">
+                        <div className="sections-content-img">
                             <img src={specialtyimg}></img>
                             <span>Co xuong khop</span>
                         </div>

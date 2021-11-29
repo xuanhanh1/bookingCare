@@ -1,7 +1,8 @@
 import actionTypes from './actionTypes';
 import {
     createNewUserService, getAllUsersService, deleteUserService,
-    editUserService, getTopDocterHomeService
+    editUserService, getTopDocterHomeService, getAllDoctorService, createInfoDoctorService,
+    getAInfoDoctorService, getAllCodeService
 } from '../../services/userService'
 
 export const addUserSuccess = () => ({
@@ -119,7 +120,7 @@ export const getTopDoctor = () => {
         try {
 
             let res = await getTopDocterHomeService('6');
-            console.log('top doctor', res)
+            // console.log('top doctor', res)
             if (res && res.errCode === 0) {
                 dispatch(getTopDoctorsSuccess(res.data))
             } else {
@@ -137,5 +138,110 @@ export const getTopDoctorsSuccess = (data) => ({
 })
 export const getTopDoctorFail = () => ({
     type: actionTypes.GET_TOP_DOCTORS_FAIL,
+
+})
+
+//get all doctor  
+export const getAllDoctor = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllDoctorService("ALL");
+            // console.log(res.data)
+            if (res && res.errCode === 0) {
+                dispatch(getAllDoctorSuccess(res.data))
+            } else {
+                dispatch(getAllDoctorFail())
+            }
+        } catch (e) {
+            dispatch(getAllDoctorFail())
+            console.log('get all doctor fail' + e)
+        }
+    }
+}
+
+export const getAllDoctorSuccess = (data) => ({
+    type: actionTypes.GET_ALL_DOCTORS_SUCCESS,
+    allDoctors: data
+})
+export const getAllDoctorFail = () => ({
+    type: actionTypes.GET_ALL_DOCTORS_FAIL,
+
+})
+//get one doctor by id 
+export const getADoctor = (doctorId) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAInfoDoctorService(doctorId);
+            console.log(res.data)
+            if (res && res.errCode === 0) {
+                dispatch(getADoctorSuccess(res.data))
+            } else {
+                dispatch(getADoctorFail())
+            }
+        } catch (e) {
+            dispatch(getADoctorFail())
+            console.log('get a doctor fail' + e)
+        }
+    }
+}
+
+export const getADoctorSuccess = (data) => ({
+    type: actionTypes.GET_A_DOCTORS_SUCCESS,
+    aDoctor: data
+})
+export const getADoctorFail = () => ({
+    type: actionTypes.GET_A_DOCTORS_FAIL,
+
+})
+//post doctor info
+export const createInfoDoctor = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            console.log(data)
+            let res = await createInfoDoctorService(data);
+            if (res && res.errCode === 0) {
+                alert('taoj thoong tin thanh bac si thanh cong ')
+                dispatch(createInfoDoctorSuccess())
+            } else {
+                dispatch(createInfodoctorFail())
+            }
+        } catch (e) {
+            dispatch(createInfodoctorFail())
+            console.log('create user failed ' + e)
+        }
+    }
+}
+export const createInfoDoctorSuccess = () => ({
+    type: actionTypes.CREATE_INFO_DOCTOR_SUCCESS,
+})
+export const createInfodoctorFail = () => ({
+    type: actionTypes.CREATE_INFO_DOCTOR_FAIL,
+
+})
+
+//get all schedule 
+export const getScheduleHour = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService("TIME");
+            // console.log(res.data)
+            if (res && res.errCode === 0) {
+                dispatch(getScheduleHourSuccess(res.data))
+            } else {
+                dispatch(getScheduleHourFail())
+            }
+        } catch (e) {
+            dispatch(getScheduleHourFail())
+            console.log('get  fail' + e)
+        }
+    }
+}
+
+export const getScheduleHourSuccess = (data) => ({
+    type: actionTypes.GET_ALLCODE_HOUR_SUCCESS,
+    scheduleData: data
+})
+export const getScheduleHourFail = () => ({
+    type: actionTypes.GET_ALLCODE_HOUR_FAIL,
 
 })

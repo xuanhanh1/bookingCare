@@ -30,6 +30,23 @@ const actionTypes = Object.freeze({
     //get top doctor informatiom
     GET_TOP_DOCTORS_SUCCESS: 'GET_TOP_DOCTORS_SUCCESS',
     GET_TOP_DOCTORS_FAIL: 'GET_TOP_DOCTORS_FAIL',
+
+    //get all doctor informatiom
+    GET_ALL_DOCTORS_SUCCESS: 'GET_ALL_DOCTORS_SUCCESS',
+    GET_ALL_DOCTORS_FAIL: 'GET_ALL_DOCTORS_FAIL',
+
+    //get a doctor informatiom detail
+    GET_A_DOCTORS_SUCCESS: 'GET_A_DOCTORS_SUCCESS',
+    GET_A_DOCTORS_FAIL: 'GET_A_DOCTORS_FAIL',
+
+    //create new infomation doctor 
+    CREATE_INFO_DOCTOR_SUCCESS: 'CREATE_INFO_DOCTOR_SUCCESS',
+    CREATE_INFO_DOCTOR_FAIL: 'CREATE_INFO_DOCTOR_FAIL',
+
+    //get allcode hours
+    GET_ALLCODE_HOUR_SUCCESS: 'GET_ALLCODE_HOUR_SUCCESS',
+    GET_ALLCODE_HOUR_FAIL: 'GET_ALLCODE_HOUR_FAIL',
+
 })
 
 export default actionTypes;

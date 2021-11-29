@@ -19,16 +19,17 @@ class UsersTable extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log(prevProps)
+        console.log(prevProps)
+        console.log(this.props.users)
         if (prevProps.users !== this.props.users) {
             this.setState({
                 users: this.props.users
             });
+            // console.log(this.state.users)
         }
     }
 
     deleteUsers = (user) => {
-
         this.props.deleteUsers(user.id)
     }
 
@@ -38,6 +39,7 @@ class UsersTable extends Component {
     }
     render() {
         let { users } = this.state
+        console.log(users)
         return (
 
             <div className="container">

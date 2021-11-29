@@ -67,6 +67,12 @@ class Login extends Component {
 
         }
     }
+
+    handlerKeyDown = (event) => {
+        if (event.key === "Enter") {
+            this.onHandleLogin();
+        }
+    }
     render() {
         return (
             <div>
@@ -95,6 +101,7 @@ class Login extends Component {
                                 <input type={this.state.isShowPassword ? "password" : "text"} className="input"
                                     value={this.state.password}
                                     onChange={(event) => { this.onChangePassword(event) }}
+                                    onKeyDown={(event) => { this.handlerKeyDown(event) }}
                                 />
                                 {this.state.isShowPassword ?
                                     <i class="fas fa-eye-slash" onClick={() => { this.onShowPassword() }}></i> :

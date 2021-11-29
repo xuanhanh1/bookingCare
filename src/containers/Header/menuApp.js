@@ -7,7 +7,13 @@ export const adminMenu = [
             },
             {
                 name: 'menu.system.user-manage', link: '/system/user-manage',
-            }
+            },
+            {
+                name: 'menu.system.manage-doctor', link: '/system/manage-doctor',
+            },
+            {
+                name: 'menu.doctor.schedule-manage', link: '/doctor/schedule-manage',
+            },
 
         ]
     },
@@ -24,6 +30,15 @@ export const adminMenu = [
             {
                 name: 'menu.system.specialti-manage', link: '/system/specialti-manage'
 
+            },
+        ]
+    },
+];
+export const doctorMenu = [
+    { //hệ thống
+        name: 'menu.doctor.user', menus: [
+            {
+                name: 'menu.doctor.schedule-manage', link: '/doctor/schedule-manage',
             },
         ]
     },
