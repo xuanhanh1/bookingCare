@@ -12,10 +12,6 @@ class DetailDoctor extends Component {
 
         this.state = {
             detailDoctor: {},
-            image: '',
-            contentHTML: '',
-            contentMarkdown: '',
-            description: '',
         }
     }
 
@@ -23,14 +19,8 @@ class DetailDoctor extends Component {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
             let res = await getAInfoDoctorService(id);
-            let imageBase64 = new Buffer(res.data.image, 'base64').toString('binary');
-            // console.log(res.data.Markdown.contentHTML)
             this.setState({
                 detailDoctor: res.data,
-                image: imageBase64,
-                contentHTML: res.data.Markdown.contentHTML,
-                contentMarkdown: res.data.Markdown.contentMarkdown,
-                description: res.data.Markdown.description,
             })
         }
     }
@@ -45,9 +35,23 @@ class DetailDoctor extends Component {
 
     render() {
 
-        // console.log(this.props.match.params.id)
-        let { detailDoctor, image, contentHTML, contentMarkdown, description } = this.state
-        // console.log(this.state)
+        let data = this.state.detailDoctor
+        console.log("check data render :", data)
+        console.log("check state render:", this.state.dataDoctor)
+        let title = ''
+        let imageBase64 = ''
+        let description = ''
+        let post = ''
+        if (data && data.positionData && data.firstName && data.lastName) {
+            title = `${data.positionData.valueVi}, ${data.firstName} ${data.lastName}`
+        }
+        if (data && data.image) {
+            imageBase64 = new Buffer(data.image, 'base64').toString('binary')
+        }
+        if (data && data.Markdown) {
+            description = data.Markdown.description
+            post = data.Markdown.contentHTML
+        }
         return (
             <div className="">
                 <Navbar />
@@ -55,15 +59,15 @@ class DetailDoctor extends Component {
                 <div className="doctor ">
                     <div className="doctor-header container">
                         <div className="doctor-header-img">
-                            <img src={image}></img>
+                            <img src={imageBase64}></img>
                         </div>
                         <div className="doctor-header-content">
-                            <h2>Giao su tien si <span>{detailDoctor.lastName}</span></h2>
+                            <h2>Giao su tien si <span>{title}</span></h2>
                             <p> {description} </p>
                         </div>
                     </div>
                     <div className="doctor-content">
-                        <div className="container" dangerouslySetInnerHTML={{ __html: contentHTML }}>
+                        <div className="container" dangerouslySetInnerHTML={{ __html: post }}>
 
                         </div>
                     </div>
