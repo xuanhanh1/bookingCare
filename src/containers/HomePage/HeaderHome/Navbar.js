@@ -15,7 +15,7 @@ class Navbar extends Component {
     }
     render() {
         return (
-            <Fragment>
+            <div className="home__heading">
                 <div className="navbar">
                     <div className="logo">
                         <i className="fas fa-list" />
@@ -47,7 +47,7 @@ class Navbar extends Component {
                 </div>
 
 
-            </Fragment>
+            </div>
         )
     }
 }
