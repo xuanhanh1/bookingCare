@@ -47,3 +47,8 @@
     background-color: rgb(35, 35, 235);
     color: white;
 }
+.btn-schedule{
+    &.active{
+        background-color: orange;
+    }
+}

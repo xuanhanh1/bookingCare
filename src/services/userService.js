@@ -38,12 +38,18 @@ const createInfoDoctorService = (data) => {
 const getAllCodeService = (inputType) => {
     return axios.get(`/api/allcode?type=${inputType}`);
 }
+const saveBulkScheduleService = (data) => {
+    return axios.post(`/api/bulk-create-schedule`, data);
+}
+const getScheduleDoctorByDate = (doctorId, date) => {
+    return axios.get(`/api/get-schedule-doctor-by-date?doctorId=${doctorId}&date=${date}`);
+}
 
 export {
     handleLoginApi, createNewUserService, getAllUsersService,
     deleteUserService, editUserService, getTopDocterHomeService,
     getAllDoctorService, createInfoDoctorService, getAInfoDoctorService,
-    getAllCodeService
+    getAllCodeService, saveBulkScheduleService, getScheduleDoctorByDate
 }
 
 

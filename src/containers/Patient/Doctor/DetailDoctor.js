@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/adminAction';
 import Navbar from '../../HomePage/HeaderHome/Navbar'
 import './DetailDoctor.scss'
+import ScheduleDoctor from './ScheduleDoctor'
 import { getAInfoDoctorService } from '../../../services/userService'
 
 class DetailDoctor extends Component {
@@ -35,9 +36,10 @@ class DetailDoctor extends Component {
 
     render() {
 
-        let data = this.state.detailDoctor
-        console.log("check data render :", data)
-        console.log("check state render:", this.state.dataDoctor)
+        let data = this.state.detailDoctor;
+        // console.log(data);
+        // console.log("check data render :", data)
+        // console.log("check state render:", this.state.dataDoctor)
         let title = ''
         let imageBase64 = ''
         let description = ''
@@ -66,6 +68,12 @@ class DetailDoctor extends Component {
                             <p> {description} </p>
                         </div>
                     </div>
+
+                    <ScheduleDoctor
+                        doctorId={data.id}
+                    />
+
+
                     <div className="doctor-content">
                         <div className="container" dangerouslySetInnerHTML={{ __html: post }}>
 

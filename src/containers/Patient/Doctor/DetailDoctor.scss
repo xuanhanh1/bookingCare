@@ -1,5 +1,5 @@
 .doctor{
-    margin-top: 20px;
+    margin-top: 45px;
     
     &-header{
         display: grid;
@@ -26,4 +26,9 @@
         background-color: #f9f9f9;
         border-top: 1px solid rgb(212, 199, 199)
     }
+    &-schedule{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
 }
+

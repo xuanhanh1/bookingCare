@@ -9,6 +9,7 @@ import DatePicker from '../../../components/Input/DatePicker';
 import { toast } from 'react-toastify';
 import _ from 'lodash';
 import moment from 'moment';
+import { saveBulkScheduleService } from '../../../services/userService'
 import './ScheduleManage.scss'
 
 class ScheduleManage extends Component {
@@ -85,7 +86,7 @@ class ScheduleManage extends Component {
             })
         }
     }
-    saveSchedule = () => {
+    saveSchedule = async () => {
         // console.log('Saving schedule state', this.state)
         let { scheduleTime, currentDate, selectedOption } = this.state
         let result = [];
@@ -95,7 +96,8 @@ class ScheduleManage extends Component {
         if (selectedOption && _.isEmpty(selectedOption)) {
             toast.error("not chose doctor")
         }
-        let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+        // let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+        let formatedDate = new Date(currentDate).getTime();
 
         if (scheduleTime && scheduleTime.length > 0) {
             let selectTime = scheduleTime.filter(item => item.isSelected === true)
@@ -103,9 +105,9 @@ class ScheduleManage extends Component {
             if (selectTime && selectTime.length > 0) {
                 selectTime.map((item, i) => {
                     let object = {};
-                    object.id = selectedOption.value;
+                    object.doctorId = selectedOption.value;
                     object.date = formatedDate;
-                    object.time = item.keyMap;
+                    object.timeType = item.keyMap;
                     result.push(object);
                 })
 
@@ -114,11 +116,18 @@ class ScheduleManage extends Component {
                 return;
             }
         }
+        let res = await saveBulkScheduleService({
+            arrSchedule: result,
+            doctorId: selectedOption.value,
+            date: formatedDate
+        })
         console.log('luu thong tin schedule time', result)
+        // console.log('saveBulkScheduleService data', res)
     }
 
     render() {
         let { scheduleTime } = this.state;
+        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
         let { allschedule } = this.props;
         // console.log(scheduleTime)
         // console.log(allschedule.valueEn)
@@ -139,7 +148,7 @@ class ScheduleManage extends Component {
                         <DatePicker
                             onChange={this.handleOnChangeDatePicker}
                             value={this.state.currentDate}
-                            minDate={new Date()}
+                            minDate={yesterday}
                         />
 
                     </div>
@@ -150,7 +159,7 @@ class ScheduleManage extends Component {
                             scheduleTime.map((item, i) => {
                                 // console.log(item)
                                 return (
-                                    <button key={i} className={item.isSelected === true ? 'active' : ''}
+                                    <button key={i} className={item.isSelected === true ? 'btn-schedule active' : 'btn-schedule'}
                                         onClick={() => this.onHandleClickBtnTime(item)}
                                     >{item.valueEn}</button>
                                 )
