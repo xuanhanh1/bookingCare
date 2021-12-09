@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/adminAction';
 import Navbar from '../../HomePage/HeaderHome/Navbar'
 import './DetailDoctor.scss'
-import ScheduleDoctor from './ScheduleDoctor'
+import ScheduleDoctor from './ScheduleDoctor';
+import ExtraInforDoctor from './ExtraInforDoctor';
 import { getAInfoDoctorService } from '../../../services/userService'
 
 class DetailDoctor extends Component {
@@ -19,7 +20,9 @@ class DetailDoctor extends Component {
     async componentDidMount() {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
+            // console.log('id in doctor detail', id);
             let res = await getAInfoDoctorService(id);
+            // console.log('get a info doctor service', res.data.image);
             this.setState({
                 detailDoctor: res.data,
             })
@@ -49,6 +52,7 @@ class DetailDoctor extends Component {
         }
         if (data && data.image) {
             imageBase64 = new Buffer(data.image, 'base64').toString('binary')
+            // console.log('img base 64', imageBase64);
         }
         if (data && data.Markdown) {
             description = data.Markdown.description
@@ -61,7 +65,7 @@ class DetailDoctor extends Component {
                 <div className="doctor ">
                     <div className="doctor-header container">
                         <div className="doctor-header-img">
-                            <img src={imageBase64}></img>
+                            <img src={data.image}></img>
                         </div>
                         <div className="doctor-header-content">
                             <h2>Giao su tien si <span>{title}</span></h2>
@@ -69,9 +73,20 @@ class DetailDoctor extends Component {
                         </div>
                     </div>
 
-                    <ScheduleDoctor
-                        doctorId={data.id}
-                    />
+                    <div className="doctorschedule container">
+                        <div className="doctorschedule-left">
+                            <ScheduleDoctor
+                                doctorId={data.id}
+                            />
+                        </div>
+                        <div className="doctor-schedule-right">
+                            <ExtraInforDoctor
+                                doctorId={data.id}
+                            />
+                        </div>
+
+                    </div>
+
 
 
                     <div className="doctor-content">
@@ -80,6 +95,8 @@ class DetailDoctor extends Component {
                         </div>
                     </div>
                 </div>
+
+
                 <div style={{ height: '100px' }}></div>
             </div>
         );

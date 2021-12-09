@@ -140,6 +140,7 @@ class ScheduleManage extends Component {
                             value={this.state.selectedOption}
                             onChange={this.handleChange}
                             options={this.state.listDoctors}
+                            placeholder={'Chọn bác sĩ'}
                         />
                     </div>
                     <div className="select-data">

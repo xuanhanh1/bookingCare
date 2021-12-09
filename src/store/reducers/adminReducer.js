@@ -8,6 +8,9 @@ const initialState = {
     allDoctors: [],
     aDoctors: [],
     schedule: [],
+    province: [],
+    price: [],
+    payment: [],
 }
 
 const appReducer = (state = initialState, action) => {
@@ -86,6 +89,39 @@ const appReducer = (state = initialState, action) => {
             }
         case actionTypes.GET_ALLCODE_HOUR_FAIL:
             state.schedule = [];
+            return {
+                ...state,
+            }
+        case actionTypes.GET_PROVINCE_SUCCESS:
+            state.province = action.provinceData;
+            // console.log(state.province)
+            return {
+                ...state,
+            }
+        case actionTypes.GET_PROVINCE_FAIL:
+            state.province = [];
+            return {
+                ...state,
+            }
+        case actionTypes.GET_PRICE_SUCCESS:
+            state.price = action.priceData;
+            // console.log(state.price)
+            return {
+                ...state,
+            }
+        case actionTypes.GET_PRICE_FAIL:
+            state.price = [];
+            return {
+                ...state,
+            }
+        case actionTypes.GET_PAYMENT_SUCCESS:
+            state.payment = action.paymentData;
+            // console.log(state.payment)
+            return {
+                ...state,
+            }
+        case actionTypes.GET_PAYMENT_FAIL:
+            state.payment = [];
             return {
                 ...state,
             }

@@ -245,3 +245,79 @@ export const getScheduleHourFail = () => ({
     type: actionTypes.GET_ALLCODE_HOUR_FAIL,
 
 })
+//get all province
+export const getProvince = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService("PROVINCE");
+            // console.log(res.data)
+            if (res && res.errCode === 0) {
+                dispatch(getProvinceSuccess(res.data))
+            } else {
+                dispatch(getProvinceFail())
+            }
+        } catch (e) {
+            dispatch(getProvinceFail())
+            console.log('get  fail' + e)
+        }
+    }
+}
+
+export const getProvinceSuccess = (data) => ({
+    type: actionTypes.GET_PROVINCE_SUCCESS,
+    provinceData: data
+})
+export const getProvinceFail = () => ({
+    type: actionTypes.GET_PROVINCE_FAIL,
+
+})
+export const getPrice = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService("PRICE");
+            // console.log(res.data)
+            if (res && res.errCode === 0) {
+                dispatch(getPriceSuccess(res.data))
+            } else {
+                dispatch(getPriceFail())
+            }
+        } catch (e) {
+            dispatch(getPriceFail())
+            console.log('get  fail' + e)
+        }
+    }
+}
+
+export const getPriceSuccess = (data) => ({
+    type: actionTypes.GET_PRICE_SUCCESS,
+    priceData: data
+})
+export const getPriceFail = () => ({
+    type: actionTypes.GET_PRICE_FAIL,
+
+})
+export const getPayment = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService("PAYMENT");
+            // console.log(res.data)
+            if (res && res.errCode === 0) {
+                dispatch(getPaymentSuccess(res.data))
+            } else {
+                dispatch(getPaymentFail())
+            }
+        } catch (e) {
+            dispatch(getPaymentFail())
+            console.log('get  fail' + e)
+        }
+    }
+}
+
+export const getPaymentSuccess = (data) => ({
+    type: actionTypes.GET_PAYMENT_SUCCESS,
+    paymentData: data
+})
+export const getPaymentFail = () => ({
+    type: actionTypes.GET_PAYMENT_FAIL,
+
+})

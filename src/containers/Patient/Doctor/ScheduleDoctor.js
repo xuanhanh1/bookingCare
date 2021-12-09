@@ -6,6 +6,7 @@ import './DetailDoctor.scss'
 import './ScheduleDoctor.scss'
 import moment from 'moment';
 import localization from 'moment/locale/vi';
+import BookingModal from './Modal/BookingModal';
 import { getScheduleDoctorByDate } from '../../../services/userService'
 
 class ScheduleDoctor extends Component {
@@ -16,6 +17,8 @@ class ScheduleDoctor extends Component {
         this.state = {
             allDays: [],
             allAvailabeTimes: [],
+            isBookingModal: false,
+            dataSchedule: {},
         }
     }
 
@@ -26,6 +29,15 @@ class ScheduleDoctor extends Component {
             allDays: allDays
         });
 
+    }
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.doctorId !== this.props.doctorId) {
+            let allDays = this.getAllDays();
+            let res = await getScheduleDoctorByDate(this.props.doctorId, allDays[0].value);
+            this.setState({
+                allAvailabeTimes: res.data ? res.data : [],
+            })
+        }
     }
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -47,15 +59,7 @@ class ScheduleDoctor extends Component {
         }
         return allDays;
     }
-    async componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.doctorId !== this.props.doctorId) {
-            let allDays = this.getAllDays();
-            let res = await getScheduleDoctorByDate(this.props.doctorId, allDays[0].value);
-            this.setState({
-                allAvailabeTimes: res.data ? res.data : [],
-            })
-        }
-    }
+
     handleOnChangeSlect = async (event) => {
         if (this.props.doctorId) {
             let doctorId = this.props.doctorId;
@@ -73,11 +77,26 @@ class ScheduleDoctor extends Component {
         }
     }
 
+    showModal = (time) => {
+        this.setState({
+            isBookingModal: true,
+            dataSchedule: time,
+        })
+        // console.log('show modal time', time)
+    }
+    closeModal = () => {
+        this.setState({
+            isBookingModal: false,
+        })
+    }
     render() {
 
 
-        let { allDays, allAvailabeTimes } = this.state;
-        console.log('check all available time', allAvailabeTimes);
+        let { allDays, allAvailabeTimes, isBookingModal, dataSchedule } = this.state;
+        let { doctorId } = this.props;
+        // console.log('doctor id in schedule ', doctorId)
+        // console.log('check all available time', allAvailabeTimes);
+        console.log('check schedule time ', dataSchedule);
         return (
             <div className="doctor-schedule container">
                 <div className="schedule-left">
@@ -105,6 +124,7 @@ class ScheduleDoctor extends Component {
                                 return (
                                     <button
                                         key={index}
+                                        onClick={() => { this.showModal(item) }}
                                     >{item.timeTypeData.valueVi}</button>
                                 )
                             })}
@@ -115,10 +135,13 @@ class ScheduleDoctor extends Component {
                         : <span>Không có lịch khám bệnh vào hôm nay </span>
                     }
                 </div>
-                <div className="schedule-right">
-
-                </div>
-                <div style={{ height: '80px' }}></div>
+                <BookingModal
+                    isBookingModal={isBookingModal}
+                    closeBookingModal={this.closeModal}
+                    dataSchedule={dataSchedule}
+                    doctorId={doctorId}
+                />
+                <div style={{ height: '50px' }}></div>
             </div>
         );
 

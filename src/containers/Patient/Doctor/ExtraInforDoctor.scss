@@ -1,0 +1,38 @@
+.content{
+    &-down{
+        margin-top: 20px;
+        border-top: 1px solid red;
+        &-left{
+            display: inline;
+           
+        }
+        p{
+            display: inline;
+            color: rgb(101, 198, 228);
+            cursor: pointer;
+        }
+        table{
+            background-color: darkgray;
+            border: 1px solid #ddd;
+            width: 100%;
+            border-color: #96D4D4;
+            // box-shadow: 0 0 4px 0 rgb(0 0 0 / 8%);
+            border-collapse: collapse;
+            box-shadow: 2px 1px 2px 2px #888888;
+            margin-top: 20px;
+            
+            tr{
+                height: 50px;
+                border: inset;
+                background-color: ghostwhite;
+                td{
+                    padding : 10px;
+                }
+            }
+            tr:last-child{
+                height: 10px;
+                background-color: ghostwhite;
+            }
+        }
+    }
+}

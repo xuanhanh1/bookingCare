@@ -1,10 +1,11 @@
 import axios from "../axios";
+import { toast } from 'react-toastify';
 const handleLoginApi = (email, password) => {
     return axios.post('/api/login', { email: email, password: password });
 }
 const createNewUserService = (data) => {
     // console.log('check data server ' + data);
-    alert('create new user success');
+    toast.success('create new user')
     return axios.post('/api/create-new-user', data);
 }
 const getAllUsersService = (inputId) => {
@@ -41,15 +42,25 @@ const getAllCodeService = (inputType) => {
 const saveBulkScheduleService = (data) => {
     return axios.post(`/api/bulk-create-schedule`, data);
 }
+const getExtraInfoDoctorService = (doctorId) => {
+    return axios.get(`/api/get-extra-infor-doctor-by-id?doctorId=${doctorId}`);
+}
+const getProfileDoctorService = (doctorId) => {
+    return axios.get(`/api/get-profile-doctor-by-id?doctorId=${doctorId}`);
+}
+
 const getScheduleDoctorByDate = (doctorId, date) => {
     return axios.get(`/api/get-schedule-doctor-by-date?doctorId=${doctorId}&date=${date}`);
 }
-
+const saveBookingService = (data) => {
+    return axios.post(`/api/patient-booking`, data);
+}
 export {
     handleLoginApi, createNewUserService, getAllUsersService,
     deleteUserService, editUserService, getTopDocterHomeService,
     getAllDoctorService, createInfoDoctorService, getAInfoDoctorService,
-    getAllCodeService, saveBulkScheduleService, getScheduleDoctorByDate
+    getAllCodeService, saveBulkScheduleService, getScheduleDoctorByDate,
+    getExtraInfoDoctorService, getProfileDoctorService, saveBookingService,
 }
 
 
