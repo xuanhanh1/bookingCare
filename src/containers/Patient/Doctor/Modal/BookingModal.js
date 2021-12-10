@@ -5,6 +5,7 @@ import ProfileDoctor from '../ProfileDoctor';
 import DatePicker from '../../../../components/Input/DatePicker';
 import { saveBookingService } from '../../../../services/userService';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 class BookingModal extends Component {
     constructor(props) {
         super(props);
@@ -22,6 +23,8 @@ class BookingModal extends Component {
             doctorId: '',
             date: '',
             timeType: '',
+            timeString: '',
+            doctorName: '',
         }
     }
 
@@ -43,6 +46,10 @@ class BookingModal extends Component {
             })
             // console.log('check data schedule in booking modal ', this.props.dataSchedule)
         }
+
+    }
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
     handleChangeInput = (event, id) => {
         let inputValue = event.target.value;
@@ -58,8 +65,16 @@ class BookingModal extends Component {
         })
     }
     saveBookingModal = async () => {
-        console.log('when submit check state', this.state)
+        // console.log('when submit check state', this.state)
+        let time = this.renderTime(this.props.dataSchedule);
+        let { dataSchedule } = this.props;
+        let name = dataSchedule.doctorData.firstName + ' ' + dataSchedule.doctorData.lastName;
+        // console.log(name);
+        // console.log('time in booking modal', time)
         let res = await saveBookingService({
+
+
+
             fullName: this.state.fullName,
             email: this.state.email,
             phoneNumber: this.state.phoneNumber,
@@ -70,12 +85,23 @@ class BookingModal extends Component {
             doctorId: this.state.doctorId,
             date: this.state.date,
             timeType: this.state.timeType,
+            timeString: time,
+            doctorName: name,
         })
-
+        console.log('check res in booking modal', res);
         if (res && res.errCode === 0) {
 
             toast.success('booking success')
             this.props.closeBookingModal()
+        }
+    }
+    renderTime = (time) => {
+        // console.log('render time', time)
+        if (time) {
+            let dateAa = moment.unix(+time.date / 1000).format('dddd - DD/MM/YYYY');
+            let dateAA = this.capitalizeFirstLetter(dateAa);
+            // console.log('render date', dateAA);
+            return dateAA
         }
     }
 
@@ -83,6 +109,7 @@ class BookingModal extends Component {
         let { isBookingModal, closeBookingModal, dataSchedule, doctorId } = this.props;
         // console.log('is booking madol in bookingmodal:', isBookingModal);
         // console.log('props in booking modal ', this.props)
+
         // console.log('data in bookingmodal:', dataSchedule);
         // console.log('state in model booking', this.state)
         return (
