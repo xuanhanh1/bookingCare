@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import logo from '../../../assets/images/images.png'
 import { withRouter } from 'react-router';
-import './HeaderHome.scss'
+import './Navbar.scss'
 class Navbar extends Component {
     constructor(props) {
         super(props);
@@ -15,13 +15,13 @@ class Navbar extends Component {
     }
     render() {
         return (
-            <div className="home__heading">
-                <div className="navbar">
-                    <div className="logo">
-                        <i className="fas fa-list" />
-                        <div className="logo_img">
-                            <img src={logo} alt="anh" onClick={() => this.goHomePage()} />
-                        </div>
+            <div className="header">
+                <div className="navbar_home container">
+                    <div className="logo" onClick={() => this.goHomePage()}>
+                        <a href="#" className="logo_link">
+                            <i className="fas fa-hospital-alt logo_icon"></i>
+                            DoctorCare
+                        </a>
                     </div>
                     <div className="content">
                         <div className="content_children">
@@ -45,8 +45,6 @@ class Navbar extends Component {
                         <a href> Đăng nhập/ đăng ký</a>
                     </div>
                 </div>
-
-
             </div>
         )
     }
