@@ -46,8 +46,8 @@ class Doctor extends Component {
         let topDoctors = this.state.topDoctors;
         // console.log(topDoctors)
         return (
-            <section className="specialty sections" >
-                <div className="sections-header">
+            <section className="specialty section container" >
+                <div className="section__header">
                     <h3>Bác sĩ nổi bật</h3>
                     <button>Xem Thêm</button>
                 </div>
