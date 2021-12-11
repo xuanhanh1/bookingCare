@@ -1,70 +1,42 @@
-.sections{
-    height: 350px;
-    background-color: #f5f5f5;
-    // border : 1px solid red;
-    padding: 0 210px;
-    display: flex;
-    flex-direction: column;
 
-    &-header{
-        position: relative;
-        margin: 39px 0px;
-        h3{
-            display: inline
+
+.specialty-card {
+    padding: 6px;
+
+    .card {
+        cursor       : pointer;
+        height       : 200px;
+        max-width    : 100%;
+        border       : .1rem solid rgba(0, 0, 0, .1);
+        border-radius: .4rem;
+
+        .card-img {
+            min-height             : 156px;
+            width                  : 100%;
+            background-position    : center;
+            background-repeat      : no-repeat;
+            background-size        : cover;
+            border-top-right-radius: .2rem;
+            border-top-left-radius : .2rem;
         }
 
-        button{
-            position: absolute;
-            right: 0;
-            border: none;
+        .card-body {
+            align-items: center;
+            position   : relative;
 
-            &:hover{
-                cursor: pointer;
-                background-color: rgb(209, 209, 73)
+            .card-title {
+                position : absolute;
+                font-size: 1.4rem;
+                margin   : auto 0;
+                top      : 50%;
+                transform: translateY(-50%);
             }
         }
     }
 
-    &-content{
-        &-img{
-            padding: 2px;
-            height: 180px ;
-            width:  278px;
-            img{
-                height: 156px ;
-                width:  278px;
-                padding: 0 12px !important;
-                object-fit: cover;
-            }
-            span{
-                margin-left: 10px;
-            }
+    .card:hover {
+        .card-title {
+            color: #4ABDE2;
         }
     }
-}
-.slick-disabled{
-    display: none !important;
-}
-.slick-prev{
-    left: 0px !important;
-    width: 45px !important;
-    height: 40px !important;
-    background: #d2d2d8 !important;
-    z-index: 1000;
-}
-.slick-next{
-    right: 0px !important;
-    width: 45px !important;
-    height: 40px !important;
-    background: #d2d2d8 !important;
-}
-
-.slick-prev:before, .slick-next:before {
-    font-family: 'slick';
-    font-size: 20px;
-    line-height: 1;
-    opacity: 1 !important;
-    color: #101010 !important;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
