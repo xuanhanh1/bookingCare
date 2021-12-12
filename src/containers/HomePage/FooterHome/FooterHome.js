@@ -27,12 +27,12 @@ class FooterHome extends Component {
                         </Link>
 
                         <h3 className="footer_title">
-                            Subscribe to our newsletter to stay update
+                            Đăng kí để theo dõi mới nhất
                         </h3>
                         <div className="footer_subscribe">
                             <input type="text" placeholder="Enter your email" className="footer_input" />
                             <button className="footer_button">
-                                Subscribe
+                                Đăng kí
                                 <i className="ri-arrow-right-up-line button_icon"></i>
                             </button>
                         </div>
@@ -40,7 +40,7 @@ class FooterHome extends Component {
 
                     <div className="footer_content">
                         <h3 className="footer_title">
-                            Our Address
+                            Địa chỉ
                         </h3>
                         <ul className="footer_data">
                             <li className="footer_information">1234 - Quận 3 - HCM</li>
@@ -51,7 +51,7 @@ class FooterHome extends Component {
 
                     <div className="footer_content">
                         <h3 className="footer_title">
-                            Contact Us
+                            Liên hệ
                         </h3>
                         <ul className="footer_data">
                             <li className="footer_information">1234 - Quận 3 - HCM</li>
@@ -72,7 +72,7 @@ class FooterHome extends Component {
 
                     <div className="footer_content">
                         <h3 className="footer_title">
-                            We accept all <br></br>credit cards
+                            Chúng tôi thanh toán <br></br>các loại thẻ
                         </h3>
                         <div className="footer_cards">
                             <img src={card1} alt="" className="footer_card" />
