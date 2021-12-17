@@ -17,9 +17,13 @@
     
     &-btn{
         margin-top: 20px;
-        background-color: #d19c0a;
+        background-color: #0a5ed1;
         cursor: pointer;
-
+        padding: 6px;
+        border-radius: 5px;
+        color: white;
+        box-sizing: border-box;
+        box-shadow: 1px 2px #41aba5;
         &:hover{
             opacity: 0.9;
         }

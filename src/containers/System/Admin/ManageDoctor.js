@@ -211,8 +211,9 @@ class ManageDoctor extends Component {
                             placeholder={'Chọn bác sĩ'}
                         />
                     </div>
-                    <div className="manage-doctor-textarea">
+                    <div className="manage-doctor-textarea ">
                         <textarea
+                            className="form-control"
                             value={this.state.description}
                             onChange={this.onChangeInput}
                         ></textarea>
@@ -255,18 +256,21 @@ class ManageDoctor extends Component {
                         <label>Tên phòng khám </label><br />
                         <input name="nameClinic" onChange={this.onChangeInput}
                             value={this.state.nameClinic}
+                            className="form-control"
                         ></input>
                     </div>
                     <div className="manage-doctors-5">
                         <label>Địa chỉ phòng khám</label><br />
                         <input name="addressClinic" onChange={this.onChangeInput}
                             value={this.state.addressClinic}
+                            className="form-control"
                         ></input>
                     </div>
-                    <div className="manage-doctors-6">
+                    <div className="manage-doctors-6 ">
                         <label>Note</label><br />
                         <input name="note" onChange={this.onChangeInput}
                             value={this.state.note}
+                            className="form-control"
                         ></input>
                     </div>
 

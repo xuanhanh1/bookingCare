@@ -133,6 +133,9 @@ class ScheduleManage extends Component {
         // console.log(allschedule.valueEn)
         return (
             <Fragment>
+                <h3 className="mt-3">
+                    ĐẶT LỊCH BÁC SỸ
+                </h3>
                 <div className="select container">
                     <div className="select-doctor">
                         <label className="">Chọn bác sỹ</label>
