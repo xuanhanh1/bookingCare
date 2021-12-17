@@ -50,8 +50,6 @@ class UserRedux extends Component {
             })
         }
     }
-
-
     onCreateUser = () => {
         // event.preventDefault();
         // console.log('check state when create user', this.state)

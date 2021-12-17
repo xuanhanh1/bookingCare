@@ -6,6 +6,8 @@ import MdEditor from 'react-markdown-editor-lite';
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
 import './ManageSpecialty.scss';
+import CommonUtils from '../../../utils/CommonUtils';
+import { saveSpecailtyService } from '../../../services/userService'
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 class ManageSpecialty extends Component {
@@ -14,7 +16,11 @@ class ManageSpecialty extends Component {
         super(props);
 
         this.state = {
-
+            nameSpecialty: '',
+            contentHTML: '',
+            contentMarkdown: '',
+            previewUrl: '',
+            imageBase64: '',
         }
     }
 
@@ -24,7 +30,59 @@ class ManageSpecialty extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
+    onChangeInput = (event) => {
+        let description = event.target.value;
+        let name = event.target.name
+        // console.log(description);
+        this.setState({
+            [name]: description
+        });
+        // console.log('set state input ', this.state)
+    }
+    handleEditorChange = ({ html, text }) => {
+        this.setState({
+            contentMarkdown: text,
+            contentHTML: html
+        });
 
+    }
+    onChangeImage = async (event) => {
+        let data = event.target.files;
+        // console.log(data)
+        let file = data[0];
+        // console.log(file)
+        if (file) {
+            let base64 = await CommonUtils.getBase64(file);
+            // console.log(base64);
+            let objectURL = URL.createObjectURL(file);
+            console.log(objectURL)
+            this.setState({
+                previewUrl: objectURL,
+                imageBase64: base64,
+            })
+        }
+    }
+    handleSaveDoctor = async () => {
+        let res = await saveSpecailtyService({
+            name: this.state.nameSpecialty,
+            imageBase64: this.state.imageBase64,
+            descriptionHTML: this.state.contentHTML,
+            descriptionMarkdown: this.state.contentMarkdown,
+        })
+        if (res && res.errCode === 0) {
+            console.log("da luu thon tin chuyen khoa thanh cong")
+        } else {
+            console.log("da luu thong tin chuyen khoa that bai")
+        }
+        // console.log(this.state)
+        // this.setState({
+        //     nameSpecialty: '',
+        //     contentHTML: '',
+        //     contentMarkdown: '',
+        //     previewUrl: '',
+        //     imageBase64: '',
+        // })
+    }
     render() {
 
         return (
@@ -34,19 +92,20 @@ class ManageSpecialty extends Component {
                 </h3>
 
                 <div className="manage-spacialty">
-
-
                     <div className="manage-spacialty-4">
                         <label>Tên chuyên khoa </label><br />
-                        <input name="nameClinic"
+                        <input name="nameSpecialty"
+                            onChange={this.onChangeInput}
+                            value={this.state.nameSpecialty}
                             className="form-control"
                         ></input>
                     </div>
                     <div className="manage-spacialty-5">
                         <label>Thêm ảnh </label><br />
-                        <input name="nameClinic"
-                            className=""
+                        <input name="image"
+                            className="form-control-file" id="exampleFormControlFile1"
                             type="file"
+                            onChange={(event) => { this.onChangeImage(event) }}
                         ></input>
                     </div>
 

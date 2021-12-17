@@ -55,12 +55,17 @@ const getScheduleDoctorByDate = (doctorId, date) => {
 const saveBookingService = (data) => {
     return axios.post(`/api/patient-booking`, data);
 }
+// lưu chuyên khoa 
+const saveSpecailtyService = (data) => {
+    return axios.post(`/api/create-new-specialty`, data);
+}
 export {
     handleLoginApi, createNewUserService, getAllUsersService,
     deleteUserService, editUserService, getTopDocterHomeService,
     getAllDoctorService, createInfoDoctorService, getAInfoDoctorService,
     getAllCodeService, saveBulkScheduleService, getScheduleDoctorByDate,
     getExtraInfoDoctorService, getProfileDoctorService, saveBookingService,
+    saveSpecailtyService,
 }
 
 
