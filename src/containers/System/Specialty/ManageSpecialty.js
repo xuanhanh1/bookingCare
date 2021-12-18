@@ -8,6 +8,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 import './ManageSpecialty.scss';
 import CommonUtils from '../../../utils/CommonUtils';
 import { saveSpecailtyService } from '../../../services/userService'
+import { toast } from 'react-toastify';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 class ManageSpecialty extends Component {
@@ -70,18 +71,18 @@ class ManageSpecialty extends Component {
             descriptionMarkdown: this.state.contentMarkdown,
         })
         if (res && res.errCode === 0) {
-            console.log("da luu thon tin chuyen khoa thanh cong")
+            toast.success('save information specialty susscess')
         } else {
-            console.log("da luu thong tin chuyen khoa that bai")
+            toast.error('save information specialty error')
         }
         // console.log(this.state)
-        // this.setState({
-        //     nameSpecialty: '',
-        //     contentHTML: '',
-        //     contentMarkdown: '',
-        //     previewUrl: '',
-        //     imageBase64: '',
-        // })
+        this.setState({
+            nameSpecialty: '',
+            contentHTML: '',
+            contentMarkdown: '',
+            previewUrl: '',
+            imageBase64: '',
+        })
     }
     render() {
 

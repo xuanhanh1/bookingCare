@@ -3,10 +3,27 @@ import Slider from "react-slick";
 import './Specialty.scss'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { getAllSpecialtyService } from '../../../services/userService'
 import specialtyimg from '../../../assets/images/co-xuong-khop.jpg'
 
 
 class Specialty extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            arrSpectials: [],
+        }
+    }
+    async componentDidMount() {
+        let res = await getAllSpecialtyService();
+        // console.log('data in specialty service', res)
+        if (res && res.errCode === 0) {
+            this.setState({
+                arrSpectials: res.data
+            })
+        }
+    }
     render() {
         var settings = {
             infinite: false,
@@ -42,6 +59,8 @@ class Specialty extends Component {
                 }
             ]
         };
+        let { arrSpectials } = this.state;
+        console.log('arr specialty in render', arrSpectials)
         return (
             <div className="specialty container section">
                 {/* <h1 className="section_heading">Chuyên khoa phổ biến</h1> */}
@@ -50,54 +69,22 @@ class Specialty extends Component {
                     <button>Xem Thêm</button>
                 </div>
                 <Slider {...settings}>
-                    <div className="specialty-card">
-                        <div className="card">
-                            <div className="card-img-top card-img" style={{ backgroundImage: `url(${specialtyimg})` }}></div>
-                            <div className="card-body">
-                                <h5 className="card-title">Răng hàm mặt</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="specialty-card">
-                        <div className="card">
-                            <div className="card-img-top card-img" style={{ backgroundImage: `url(${specialtyimg})` }}></div>
-                            <div className="card-body">
-                                <h5 className="card-title">Xương khớp</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="specialty-card">
-                        <div className="card">
-                            <div className="card-img-top card-img" style={{ backgroundImage: `url(${specialtyimg})` }}></div>
-                            <div className="card-body">
-                                <h5 className="card-title">Tim mạnh</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="specialty-card">
-                        <div className="card">
-                            <div className="card-img-top card-img" style={{ backgroundImage: `url(${specialtyimg})` }}></div>
-                            <div className="card-body">
-                                <h5 className="card-title">Chấn thương chỉnh hình</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="specialty-card">
-                        <div className="card">
-                            <div className="card-img-top card-img" style={{ backgroundImage: `url(${specialtyimg})` }}></div>
-                            <div className="card-body">
-                                <h5 className="card-title">Nội soi</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="specialty-card">
-                        <div className="card">
-                            <div className="card-img-top card-img" style={{ backgroundImage: `url(${specialtyimg})` }}></div>
-                            <div className="card-body">
-                                <h5 className="card-title">Tiêu hoá</h5>
-                            </div>
-                        </div>
-                    </div>
+                    {arrSpectials && arrSpectials.length > 0 &&
+                        arrSpectials.map((item, index) => {
+                            return (
+                                <div className="specialty-card">
+                                    <div className="card">
+                                        <div className="card-img-top card-img" style={{ backgroundImage: `url(${item.image})` }}></div>
+                                        <div className="card-body">
+                                            <h5 className="card-title">{item.name}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+
+
                 </Slider>
             </div >
         )

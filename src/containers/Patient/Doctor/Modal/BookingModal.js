@@ -93,6 +93,8 @@ class BookingModal extends Component {
 
             toast.success('booking success')
             this.props.closeBookingModal()
+        } else {
+            toast.error('booking error')
         }
     }
     renderTime = (time) => {
