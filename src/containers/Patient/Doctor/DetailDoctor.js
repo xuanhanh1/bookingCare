@@ -5,6 +5,7 @@ import Navbar from '../../HomePage/HeaderHome/Navbar'
 import './DetailDoctor.scss'
 import ScheduleDoctor from './ScheduleDoctor';
 import ExtraInforDoctor from './ExtraInforDoctor';
+import Footer from '../../HomePage/FooterHome/FooterHome'
 import { getAInfoDoctorService } from '../../../services/userService'
 
 class DetailDoctor extends Component {
@@ -79,6 +80,7 @@ class DetailDoctor extends Component {
                                 doctorId={data.id}
                             />
                         </div>
+
                         <div className="doctor-schedule-right">
                             <ExtraInforDoctor
                                 doctorId={data.id}
@@ -86,7 +88,7 @@ class DetailDoctor extends Component {
                         </div>
 
                     </div>
-
+                    <div style={{ height: '5px' }}></div>
 
 
                     <div className="doctor-content">
@@ -97,7 +99,8 @@ class DetailDoctor extends Component {
                 </div>
 
 
-                <div style={{ height: '100px' }}></div>
+                <div style={{ height: '10px', backgroundColor: '#a5e0f1' }}></div>
+                <Footer></Footer>
             </div>
         );
     }

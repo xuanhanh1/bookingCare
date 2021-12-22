@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/adminAction';
 import './ManageDoctor.scss'
-import { getAInfoDoctorService } from '../../../services/userService'
+import { getAInfoDoctorService } from '../../../services/userService';
+import { CRUD_ACTION } from '../../../utils/constant';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 // import style manually
@@ -25,12 +26,18 @@ class ManageDoctor extends Component {
             listPrice: [],
             listPayment: [],
             listProvince: [],
+            listSpecialty: [],
+            listClinic: [],
+            selectClinic: '',
+            selectSpecialty: '',
             selectPrice: '',
             selectPayment: '',
             selectProvince: '',
             nameClinic: '',
             addressClinic: '',
             note: '',
+
+            action: CRUD_ACTION.CREATE,
         }
     }
 
@@ -39,6 +46,7 @@ class ManageDoctor extends Component {
         this.props.getProvince();
         this.props.getPrice();
         this.props.getPayment();
+        this.props.getSpecialty();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -73,6 +81,15 @@ class ManageDoctor extends Component {
             })
 
         }
+        //get specialty
+        if (prevProps.specialty !== this.props.specialty) {
+            let dataInput = this.inputInforDataSpecialty(this.props.specialty)
+            // console.log('input data format', dataInput)
+            this.setState({
+                listSpecialty: dataInput
+            })
+
+        }
     }
     handleEditorChange = ({ html, text }) => {
         this.setState({
@@ -82,7 +99,7 @@ class ManageDoctor extends Component {
 
     }
     handleChange = async (selectedOption) => {
-        console.log(selectedOption)
+        // console.log(selectedOption)
         this.setState({
             selectedOption: selectedOption,
         });
@@ -107,7 +124,7 @@ class ManageDoctor extends Component {
     handleChangeInfor = (selectOption, name) => {
         console.log('selected option value:', selectOption, name);
         let stateName = name.name;
-        console.log(stateName);
+        // console.log(stateName);
         let stateCopy = { ...this.state };
         stateCopy[stateName] = selectOption
         this.setState({
@@ -122,6 +139,14 @@ class ManageDoctor extends Component {
         // console.log(description);
         this.setState({
             [name]: description
+        });
+        // console.log('set state input ', this.state)
+    }
+    onChangeTextArea = (event) => {
+        let description = event.target.value;
+        // console.log(description);
+        this.setState({
+            description: description
         });
         // console.log('set state input ', this.state)
     }
@@ -152,8 +177,22 @@ class ManageDoctor extends Component {
         }
         return result;
     }
+    //get inputInforDataSpecialty
+    inputInforDataSpecialty = (inputData) => {
+        let result = [];
+        // console.log('input data begin', inputData)
+        if (inputData) {
+            inputData.map((item, key) => {
+                let object = {};
+                object.value = item.id;
+                object.label = item.name;
+                result.push(object);
+            })
+        }
+        return result;
+    }
     handleSaveDoctor = () => {
-        // console.log(this.state)
+        console.log(this.state.selectSpecialty.value)
         this.props.createInfoDoctor({
             contentHTML: this.state.contentHTML,
             contentMarkdown: this.state.contentMarkdown,
@@ -165,9 +204,9 @@ class ManageDoctor extends Component {
             selectedProvince: this.state.selectProvince.value,
             nameClinic: this.state.nameClinic,
             addressClinic: this.state.addressClinic,
+            specialtyId: this.state.selectSpecialty.value,
             note: this.state.note,
-
-
+            action: this.state.action,
         })
 
         this.setState({
@@ -187,13 +226,16 @@ class ManageDoctor extends Component {
 
 
     render() {
-        let { selectedOption, listDoctors, listProvince, listPrice, listPayment, selectPayment, selectPrice, selectProvince } = this.state;
-        // console.log('state price', listPrice)
+        let { selectedOption, listDoctors, listProvince, listPrice,
+            listPayment, selectPayment, selectPrice, selectProvince,
+            listSpecialty, selectSpecialty, contentMarkdown
+        } = this.state;
+        console.log('state contentMarkdown', selectSpecialty)
         // console.log('state listDoctors', this.state.listDoctors)
         // console.log('state selectedOption', this.state.selectedOption)
         // console.log(this.state)
-        let { province, price, payment } = this.props
-        // console.log('price', price)
+        let { province, price, payment, specialty } = this.props
+        // console.log('price', specialty)
         // console.log('province', listProvince)
         // console.log('payment', payment)
         return (
@@ -215,7 +257,7 @@ class ManageDoctor extends Component {
                         <textarea
                             className="form-control"
                             value={this.state.description}
-                            onChange={this.onChangeInput}
+                            onChange={this.onChangeTextArea}
                         ></textarea>
                     </div>
                 </div>
@@ -244,7 +286,7 @@ class ManageDoctor extends Component {
                     <div className="manage-doctors-3">
                         <label>Chọn tỉnh thành</label><br />
                         <Select name="selectProvince" id="" value={selectProvince}
-                            onChange={selectProvince}
+                            onChange={this.handleChangeInfor}
                             options={listProvince}
                             placeholder={'Chọn tỉnh thành phố'}>
 
@@ -274,6 +316,28 @@ class ManageDoctor extends Component {
                         ></input>
                     </div>
 
+                    {/* specitial  */}
+                    <div className="manage-doctors-7">
+                        <label>Chọn địa chỉ </label><br />
+                        <Select name="selectProvince" id=""
+                            // value={selectSpecialty}
+                            // onChange={selectProvince}
+                            // options={listProvince}
+                            placeholder={'Chọn địa chỉ'}>
+
+                        </Select>
+                    </div>
+                    <div className="manage-doctors-8">
+                        <label>Chọn chuyên khoa</label><br />
+                        <Select name="selectSpecialty" id=""
+                            value={selectSpecialty}
+                            onChange={this.handleChangeInfor}
+                            options={listSpecialty}
+                            placeholder={'Chọn chuyên khoa'}>
+
+                        </Select>
+                    </div>
+
                 </div>
                 <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)}
                     onChange={this.handleEditorChange}
@@ -295,6 +359,7 @@ const mapStateToProps = state => {
         province: state.admin.province,
         price: state.admin.price,
         payment: state.admin.payment,
+        specialty: state.admin.specialty,
     };
 };
 
@@ -304,6 +369,7 @@ const mapDispatchToProps = dispatch => {
         getProvince: () => dispatch(actions.getProvince()),
         getPrice: () => dispatch(actions.getPrice()),
         getPayment: () => dispatch(actions.getPayment()),
+        getSpecialty: () => dispatch(actions.getSpecialty()),
         createInfoDoctor: (data) => dispatch(actions.createInfoDoctor(data)),
 
     };

@@ -11,6 +11,7 @@ const initialState = {
     province: [],
     price: [],
     payment: [],
+    specialty: [],
 }
 
 const appReducer = (state = initialState, action) => {
@@ -122,6 +123,18 @@ const appReducer = (state = initialState, action) => {
             }
         case actionTypes.GET_PAYMENT_FAIL:
             state.payment = [];
+            return {
+                ...state,
+            }
+        //get specialty
+        case actionTypes.GET_SPECIALTY_SUCCESS:
+            state.specialty = action.specialtyData;
+            // console.log(state.specialty)
+            return {
+                ...state,
+            }
+        case actionTypes.GET_SPECIALTY_FAIL:
+            state.specialty = [];
             return {
                 ...state,
             }

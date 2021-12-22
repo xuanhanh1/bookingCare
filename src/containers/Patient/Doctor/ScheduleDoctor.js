@@ -25,6 +25,14 @@ class ScheduleDoctor extends Component {
     async componentDidMount() {
         let allDays = this.getAllDays()
         // console.log('all day ', allDays);
+        if (this.props.doctorId) {
+            let allDays = this.getAllDays();
+            let res = await getScheduleDoctorByDate(this.props.doctorId, allDays[0].value);
+            this.setState({
+                allAvailabeTimes: res.data ? res.data : [],
+            })
+        }
+
         this.setState({
             allDays: allDays
         });
@@ -141,7 +149,7 @@ class ScheduleDoctor extends Component {
                     dataSchedule={dataSchedule}
                     doctorId={doctorId}
                 />
-                <div style={{ height: '50px' }}></div>
+                {/* <div style={{ height: '50px' }}></div> */}
             </div>
         );
 

@@ -8,7 +8,8 @@ class ProfileDoctor extends Component {
         super(props);
 
         this.state = {
-            dataProfile: {}
+            dataProfile: {},
+
         }
     }
 
@@ -50,7 +51,7 @@ class ProfileDoctor extends Component {
     render() {
         let { dataProfile } = this.state;
         // console.log('props in ptofile: ', this.props)
-        let { showDescription, dataSchedule } = this.props;
+        let { showDescription, dataSchedule, isMore, doctorId } = this.props;
         let description = dataProfile.Doctor_Infor;
         // console.log('description: ', description)
         // console.log('state in profile', dataProfile);
@@ -60,9 +61,10 @@ class ProfileDoctor extends Component {
             <div className="doctor-profile-header container">
                 <div className="doctor-profile-header-img">
                     <img src={dataProfile.image}></img>
+
                 </div>
                 <div className="doctor-profile-header-content">
-                    <h2>Giao su tien si <span>{name}</span></h2>
+                    <h2>Bác Sĩ <span>{name}</span></h2>
                     <p>
 
                         {showDescription &&
@@ -71,19 +73,27 @@ class ProfileDoctor extends Component {
                         {this.renderTime(dataSchedule)}
                     </p>
                 </div>
-                <div className="price"> Giá khám:
-                    <span>
-                        <NumberFormat
-                            value={
-                                dataProfile && dataProfile.Doctor_Infor && dataProfile.Doctor_Infor.priceTypeData &&
-                                dataProfile.Doctor_Infor.priceTypeData.valueVi
-                            }
-                            thousandSeparator={true}
-                            suffix={'VND'}
-                            displayType={'text'}
-                        />
-                    </span>
-                </div>
+                {isMore ?
+                    <div className="doctor-profile-header-more" >
+                        <a href={`/doctorDetail/${doctorId}`}> Xem thêm</a>
+                    </div> : ''
+                }
+                {isMore ? '' :
+                    <div className="price"> Giá khám:
+                        <span>
+                            <NumberFormat
+                                value={
+                                    dataProfile && dataProfile.Doctor_Infor && dataProfile.Doctor_Infor.priceTypeData &&
+                                    dataProfile.Doctor_Infor.priceTypeData.valueVi
+                                }
+                                thousandSeparator={true}
+                                suffix={'VND'}
+                                displayType={'text'}
+                            />
+                        </span>
+                    </div>
+                }
+
 
             </div>
         )

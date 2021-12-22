@@ -18,13 +18,19 @@
                 font-size: 18px;
             }
         }
+        &-more{       
+            width: 220px;
+            text-align: center;
+            margin-top: 20px;
+
+        }
         .price{
             width: 180px;
             padding:  10px;
-            border: 1px solid midnightblue;
+            border: 1px solid #30305775;
             margin-left: 50px;
             margin-top: 20px;
-            box-shadow: 2px 1px 0px midnightblue;
+            box-shadow: 2px 1px 0px #30305775;
         }
     }
 

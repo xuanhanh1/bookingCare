@@ -55,6 +55,10 @@ const actionTypes = Object.freeze({
     GET_PAYMENT_SUCCESS: 'GET_PAYMENT_SUCCESS',
     GET_PAYMENT_FAIL: 'GET_PAYMENT_FAIL',
 
+    //get specialty
+    GET_SPECIALTY_SUCCESS: 'GET_SPECIALTY_SUCCESS',
+    GET_SPECIALTY_FAIL: 'GET_SPECIALTY_FAIL',
+
 })
 
 export default actionTypes;

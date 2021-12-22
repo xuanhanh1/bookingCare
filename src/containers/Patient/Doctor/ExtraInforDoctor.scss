@@ -1,6 +1,9 @@
 .content{
+    &-up{
+        margin-top: 10px;
+    }
     &-down{
-        margin-top: 20px;
+        margin-top: 10px;
         border-top: 1px solid red;
         &-left{
             display: inline;

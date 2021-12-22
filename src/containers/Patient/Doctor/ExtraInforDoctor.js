@@ -19,7 +19,13 @@ class ExtraInforDoctor extends Component {
     }
 
     async componentDidMount() {
-
+        let res = await getExtraInfoDoctorService(this.props.doctorId)
+        // console.log('data in extra data', res)
+        if (res && res.errCode === 0) {
+            this.setState({
+                dataExtraInfo: res.data,
+            })
+        }
 
     }
 

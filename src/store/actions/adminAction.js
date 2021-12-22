@@ -2,7 +2,7 @@ import actionTypes from './actionTypes';
 import {
     createNewUserService, getAllUsersService, deleteUserService,
     editUserService, getTopDocterHomeService, getAllDoctorService, createInfoDoctorService,
-    getAInfoDoctorService, getAllCodeService
+    getAInfoDoctorService, getAllCodeService, getAllSpecialtyService
 } from '../../services/userService'
 
 export const addUserSuccess = () => ({
@@ -50,7 +50,6 @@ export const getAllUsers = () => {
         }
     }
 }
-
 export const getAllUsersSuccess = (data) => ({
     type: actionTypes.GET_ALL_USERS_SUCCESS,
     users: data
@@ -78,7 +77,6 @@ export const deleteUsers = (data) => {
         }
     }
 }
-
 export const deleteUserSuccess = (id) => ({
     type: actionTypes.DELETE_USER_SUCCESS,
     users: id
@@ -197,10 +195,10 @@ export const getADoctorFail = () => ({
 export const createInfoDoctor = (data) => {
     return async (dispatch, getState) => {
         try {
-            console.log(data)
+            // console.log(data)
             let res = await createInfoDoctorService(data);
             if (res && res.errCode === 0) {
-                alert('taoj thoong tin thanh bac si thanh cong ')
+                // alert('taoj thoong tin thanh bac si thanh cong ')
                 dispatch(createInfoDoctorSuccess())
             } else {
                 dispatch(createInfodoctorFail())
@@ -262,7 +260,6 @@ export const getProvince = () => {
         }
     }
 }
-
 export const getProvinceSuccess = (data) => ({
     type: actionTypes.GET_PROVINCE_SUCCESS,
     provinceData: data
@@ -271,6 +268,7 @@ export const getProvinceFail = () => ({
     type: actionTypes.GET_PROVINCE_FAIL,
 
 })
+// get price
 export const getPrice = () => {
     return async (dispatch, getState) => {
         try {
@@ -287,7 +285,6 @@ export const getPrice = () => {
         }
     }
 }
-
 export const getPriceSuccess = (data) => ({
     type: actionTypes.GET_PRICE_SUCCESS,
     priceData: data
@@ -296,6 +293,7 @@ export const getPriceFail = () => ({
     type: actionTypes.GET_PRICE_FAIL,
 
 })
+//get payment
 export const getPayment = () => {
     return async (dispatch, getState) => {
         try {
@@ -312,12 +310,36 @@ export const getPayment = () => {
         }
     }
 }
-
 export const getPaymentSuccess = (data) => ({
     type: actionTypes.GET_PAYMENT_SUCCESS,
     paymentData: data
 })
 export const getPaymentFail = () => ({
     type: actionTypes.GET_PAYMENT_FAIL,
+
+})
+// get Specialty
+export const getSpecialty = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllSpecialtyService();
+            // console.log(res.data)
+            if (res && res.errCode === 0) {
+                dispatch(getSpecialtySuccess(res.data))
+            } else {
+                dispatch(getPaymentFail())
+            }
+        } catch (e) {
+            dispatch(getSpecialtyFail())
+            console.log('get  fail' + e)
+        }
+    }
+}
+export const getSpecialtySuccess = (data) => ({
+    type: actionTypes.GET_SPECIALTY_SUCCESS,
+    specialtyData: data
+})
+export const getSpecialtyFail = () => ({
+    type: actionTypes.GET_SPECIALTY_FAIL,
 
 })
