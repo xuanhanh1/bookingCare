@@ -12,6 +12,7 @@ const initialState = {
     price: [],
     payment: [],
     specialty: [],
+    clinic: [],
 }
 
 const appReducer = (state = initialState, action) => {
@@ -135,6 +136,18 @@ const appReducer = (state = initialState, action) => {
             }
         case actionTypes.GET_SPECIALTY_FAIL:
             state.specialty = [];
+            return {
+                ...state,
+            }
+        //GET CLINIC
+        case actionTypes.GET_CLINIC_SUCCESS:
+            state.clinic = action.clinicData;
+            // console.log(state.specialty)
+            return {
+                ...state,
+            }
+        case actionTypes.GET_CLINIC_FAIL:
+            state.clinic = [];
             return {
                 ...state,
             }

@@ -29,7 +29,12 @@ class BookingModal extends Component {
     }
 
     async componentDidMount() {
-
+        let { timeType, date } = this.props.dataSchedule
+        this.setState({
+            doctorId: this.props.doctorId,
+            timeType: timeType,
+            date: date,
+        })
 
     }
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -81,7 +86,7 @@ class BookingModal extends Component {
             address: this.state.address,
             reason: this.state.reason,
             birthday: this.state.birthday,
-            gender: this.state.gender,
+            selectedGender: this.state.gender,
             doctorId: this.state.doctorId,
             date: this.state.date,
             timeType: this.state.timeType,

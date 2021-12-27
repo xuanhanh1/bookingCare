@@ -46,7 +46,7 @@ class Doctor extends Component {
         let topDoctors = this.state.topDoctors;
         // console.log(topDoctors)
         return (
-            <section className="specialty section container" >
+            <section className="special section container" >
                 <div className="section__header">
                     <h3>Bác sĩ nổi bật</h3>
                     <button>Xem Thêm</button>
@@ -65,7 +65,7 @@ class Doctor extends Component {
                                     onClick={() => { this.handerViewDetailDoctor(item.id) }}
                                 >
                                     <img src={imageBase64}></img>
-                                    <h3>Phó giáo sư tiến sĩ {item.lastName}</h3>
+                                    <h3>Bác sĩ {item.lastName}</h3>
                                     <span>Co xuong khop</span>
                                 </div>
                             )

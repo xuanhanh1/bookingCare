@@ -2,7 +2,7 @@ import actionTypes from './actionTypes';
 import {
     createNewUserService, getAllUsersService, deleteUserService,
     editUserService, getTopDocterHomeService, getAllDoctorService, createInfoDoctorService,
-    getAInfoDoctorService, getAllCodeService, getAllSpecialtyService
+    getAInfoDoctorService, getAllCodeService, getAllSpecialtyService, getAllClinicService
 } from '../../services/userService'
 
 export const addUserSuccess = () => ({
@@ -327,7 +327,7 @@ export const getSpecialty = () => {
             if (res && res.errCode === 0) {
                 dispatch(getSpecialtySuccess(res.data))
             } else {
-                dispatch(getPaymentFail())
+                dispatch(getSpecialtyFail())
             }
         } catch (e) {
             dispatch(getSpecialtyFail())
@@ -341,5 +341,30 @@ export const getSpecialtySuccess = (data) => ({
 })
 export const getSpecialtyFail = () => ({
     type: actionTypes.GET_SPECIALTY_FAIL,
+
+})
+//get Clinic 
+export const getClinic = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllClinicService();
+            // console.log(res.data)
+            if (res && res.errCode === 0) {
+                dispatch(getClinicSuccess(res.data))
+            } else {
+                dispatch(getClinicFail())
+            }
+        } catch (e) {
+            dispatch(getClinicFail())
+            console.log('get  fail' + e)
+        }
+    }
+}
+export const getClinicSuccess = (data) => ({
+    type: actionTypes.GET_CLINIC_SUCCESS,
+    clinicData: data
+})
+export const getClinicFail = () => ({
+    type: actionTypes.GET_CLINIC_FAIL,
 
 })

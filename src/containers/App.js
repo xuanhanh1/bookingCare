@@ -11,7 +11,8 @@ import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authenticati
 import { path } from '../utils'
 import HomePage from './HomePage/HomePage';
 import DetailDoctor from './Patient/Doctor/DetailDoctor';
-import DetailSpecialty from './Patient/Specialty/DetailSpecialty'
+import DetailSpecialty from './Patient/Specialty/DetailSpecialty';
+import DetailClinic from './Patient/Clinic/DetailClinic'
 import Home from '../routes/Home';
 import Login from '../containers/Auth/Login';
 import Header from './Header/Header';
@@ -60,6 +61,7 @@ class App extends Component {
                                     <Route path={path.HOMEPAGE} component={(HomePage)} />
                                     <Route path={path.DOCTORID} component={(DetailDoctor)} />
                                     <Route path={path.SPECIALTYID} component={(DetailSpecialty)} />
+                                    <Route path={path.CLINICID} component={(DetailClinic)} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

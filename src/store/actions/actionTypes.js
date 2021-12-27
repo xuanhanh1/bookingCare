@@ -59,6 +59,10 @@ const actionTypes = Object.freeze({
     GET_SPECIALTY_SUCCESS: 'GET_SPECIALTY_SUCCESS',
     GET_SPECIALTY_FAIL: 'GET_SPECIALTY_FAIL',
 
+    //get clinc
+    GET_CLINIC_SUCCESS: 'GET_CLINIC_SUCCESS',
+    GET_CLINIC_FAIL: 'GET_CLINIC_FAIL',
+
 })
 
 export default actionTypes;

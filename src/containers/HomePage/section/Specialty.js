@@ -66,9 +66,9 @@ class Specialty extends Component {
             ]
         };
         let { arrSpectials } = this.state;
-        console.log('arr specialty in render', arrSpectials)
+        // console.log('arr specialty in render', arrSpectials)
         return (
-            <div className="specialty container section">
+            <div className="special container section">
                 {/* <h1 className="section_heading">Chuyên khoa phổ biến</h1> */}
                 <div className="section__header">
                     <h3>Chuyên khoa phổ biến</h3>

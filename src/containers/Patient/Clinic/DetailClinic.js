@@ -5,18 +5,18 @@ import Navbar from '../../HomePage/HeaderHome/Navbar';
 import ScheduleDoctor from '../Doctor/ScheduleDoctor';
 import ExtraInforDoctor from '../Doctor/ExtraInforDoctor';
 import ProfileDoctor from '../Doctor/ProfileDoctor'
-import { getSpecialtyByIdService } from '../../../services/userService'
-import './DetailSpecialty.scss';
+import { getClinicByIdService } from '../../../services/userService'
+import './DetailClinic.scss';
 
-class DetailSpecialty extends Component {
+class DetailClinic extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             // arrSpectialty: [59, 60],
-            arrSpectialty: {},
-            arrSpectialtyId: [],
+            arrClinic: {},
+            arrClinicId: [],
             isMore: true,
         }
     }
@@ -25,14 +25,13 @@ class DetailSpecialty extends Component {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
             // console.log('id in doctor detail', id);
-            let res = await getSpecialtyByIdService({
+            let res = await getClinicByIdService({
                 id: id,
-                location: 'ALL'
             });
-            // console.log('get a info doctor service', res.data.image);
+            // console.log('get a info doctor service', res);
             this.setState({
-                arrSpectialty: res.data,
-                arrSpectialtyId: res.data.doctorSpecialty
+                arrClinic: res.data,
+                arrClinicId: res.data.doctorClinic
             })
         }
     }
@@ -44,24 +43,27 @@ class DetailSpecialty extends Component {
 
 
     render() {
-        let { arrSpectialty, arrSpectialtyId, isMore } = this.state
-        // console.log('id specialty in detail specialty', this.state)
+        let { arrClinicId, arrClinic, isMore } = this.state
+        console.log('id specialty in detail specialty', this.state)
         return (
             <div className="specialty">
                 <div className=" container ">
+
                     <Navbar />
                     <div className="description">
-                        {arrSpectialty && arrSpectialty.length > 0 &&
-                            arrSpectialty.descriptionHTML
-                            ? arrSpectialty.descriptionHTML :
+                        {arrClinic && arrClinic.length > 0 &&
+                            arrClinic.descriptionHTML
+                            ? arrClinic.descriptionHTML :
                             <div className="container" dangerouslySetInnerHTML={{
-                                __html: arrSpectialty.descriptionHTML
+                                __html: arrClinic.descriptionHTML
                             }}>
                             </div>
                         }
                     </div>
-                    {arrSpectialtyId && arrSpectialtyId.length > 0 &&
-                        arrSpectialtyId.map((item, index) => {
+
+
+                    {arrClinicId && arrClinicId.length > 0 &&
+                        arrClinicId.map((item, index) => {
                             return (
                                 <div className="sp">
                                     <div className="sp-left">
@@ -93,7 +95,7 @@ class DetailSpecialty extends Component {
 
 
 
-                    <div style={{ height: '100px' }}></div>
+                    <div style={{ height: '10px' }}></div>
                 </div>
             </div>
 
@@ -116,4 +118,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailSpecialty);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailClinic);

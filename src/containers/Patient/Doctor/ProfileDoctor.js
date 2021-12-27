@@ -3,6 +3,8 @@ import './ProfileDoctor.scss';
 import { getProfileDoctorService } from '../../../services/userService';
 import NumberFormat from 'react-number-format';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
+
 class ProfileDoctor extends Component {
     constructor(props) {
         super(props);
@@ -75,7 +77,8 @@ class ProfileDoctor extends Component {
                 </div>
                 {isMore ?
                     <div className="doctor-profile-header-more" >
-                        <a href={`/doctorDetail/${doctorId}`}> Xem thêm</a>
+                        <Link to={`/doctorDetail/${doctorId}`}> Xem thêm</Link>
+
                     </div> : ''
                 }
                 {isMore ? '' :

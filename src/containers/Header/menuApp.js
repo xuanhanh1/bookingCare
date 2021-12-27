@@ -40,6 +40,9 @@ export const doctorMenu = [
             {
                 name: 'menu.doctor.schedule-manage', link: '/doctor/schedule-manage',
             },
+            {
+                name: 'menu.doctor.paitent-manage', link: '/doctor/paitent-manage',
+            },
         ]
     },
 ];

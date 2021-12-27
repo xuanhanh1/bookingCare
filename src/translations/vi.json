@@ -19,7 +19,8 @@
         },
         "doctor": {
             "user": "Người dùng",
-            "schedule-manage": "Lịch bác sỹ"
+            "schedule-manage": "Lịch bác sỹ",
+            "pantent-manage": "Quản lý bệnh nhân"
         }
     }
 }
