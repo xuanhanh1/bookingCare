@@ -65,7 +65,8 @@ class Doctor extends Component {
                                     onClick={() => { this.handerViewDetailDoctor(item.id) }}
                                 >
                                     <img src={imageBase64}></img>
-                                    <h3> {item.positionData.valueVi} {item.lastName}</h3>
+                                    <h3> {item.positionData.valueVi} </h3>
+                                    <h4>{item.firstName} {item.lastName}</h4>
                                     {/* <span>Co xuong khop</span> */}
                                 </div>
                             )
