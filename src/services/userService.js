@@ -77,9 +77,13 @@ const getAllClinicService = () => {
 const getClinicByIdService = (data) => {
     return axios.get(`/api/get-infor-clinic-by-id?id=${data.id}`);
 }
-//get list 
+//get list  patient
 const getListPatientService = (data) => {
     return axios.get(`/api/get-list-patient?doctorId=${data.doctorId}&date=${data.date}`);
+}
+//send remedy email /api/send-remedy
+const sendRemedyService = (data) => {
+    return axios.post(`/api/send-remedy`, data);
 }
 export {
     handleLoginApi, createNewUserService, getAllUsersService,
@@ -88,7 +92,7 @@ export {
     getAllCodeService, saveBulkScheduleService, getScheduleDoctorByDate,
     getExtraInfoDoctorService, getProfileDoctorService, saveBookingService,
     saveSpecailtyService, getAllSpecialtyService, getSpecialtyByIdService, saveClinicService,
-    getAllClinicService, getClinicByIdService, getListPatientService
+    getAllClinicService, getClinicByIdService, getListPatientService, sendRemedyService
 }
 
 

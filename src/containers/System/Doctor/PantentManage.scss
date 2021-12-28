@@ -2,6 +2,19 @@
     .select-data input {
         width: 50%;
     }
-    
+    .table{
+        margin-top: 20px;
+        .btn-up{
+            font-size: 14px !important;
+            margin-right: 10px;
+        }
+        .btn-down{
+            font-size: 14px !important;
+        }
+        h3{
+            text-align: center;
+            margin-top: 10px;
+        }
+    }
 }
 

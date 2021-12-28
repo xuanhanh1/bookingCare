@@ -10,7 +10,7 @@
             "user": "Người dùng",
             "user-manage": "Quản lý người sử dụng",
             "manage-doctor": "Quản lý bác sĩ",
-            "user-redux": "CRUD redux",
+            "user-redux": "Quản lý người dùng",
             "clinic": "Phòng khám",
             "clinic-manage": "Quản lý phòng khám",
             "specialti": "Chuyên khoa",
@@ -20,7 +20,7 @@
         "doctor": {
             "user": "Người dùng",
             "schedule-manage": "Lịch bác sỹ",
-            "pantent-manage": "Quản lý bệnh nhân"
+            "paitent-manage": "Quản lý bệnh nhân"
         }
     }
 }

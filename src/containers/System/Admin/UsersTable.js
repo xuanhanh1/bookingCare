@@ -60,7 +60,7 @@ class UsersTable extends Component {
                             {users.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <th scope="row">{index}</th>
+                                        <th scope="row">{index + 1}</th>
                                         <td>{item.email}</td>
                                         <td>{item.firstName}</td>
                                         <td>{item.lastName}</td>

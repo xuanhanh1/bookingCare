@@ -59,14 +59,14 @@ class Doctor extends Component {
                                 imageBase64 = new Buffer(item.image, 'base64').toString('binary');
                                 // console.log(imageBase64)
                             }
-                            // console.log(item)
+                            console.log(item)
                             return (
                                 <div className="sections-content-img doctor-img"
                                     onClick={() => { this.handerViewDetailDoctor(item.id) }}
                                 >
                                     <img src={imageBase64}></img>
-                                    <h3>Bác sĩ {item.lastName}</h3>
-                                    <span>Co xuong khop</span>
+                                    <h3> {item.positionData.valueVi} {item.lastName}</h3>
+                                    {/* <span>Co xuong khop</span> */}
                                 </div>
                             )
                         })}

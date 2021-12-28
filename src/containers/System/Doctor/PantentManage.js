@@ -7,7 +7,7 @@ import { dateFormat } from '../../../utils';
 import * as actions from '../../../store/actions/adminAction';
 import DatePicker from '../../../components/Input/DatePicker';
 import { toast } from 'react-toastify';
-import { getListPatientService } from '../../../services/userService'
+import { getListPatientService, sendRemedyService } from '../../../services/userService'
 import _ from 'lodash';
 import moment from 'moment';
 import './PantentManage.scss'
@@ -39,20 +39,45 @@ class PantentManage extends Component {
                 dataPatient: res.data
             })
         }
-        console.log('state', this.state)
 
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
-    handleOnChangeDatePicker = (date) => {
+    handleOnChangeDatePicker = async (date) => {
         this.setState({
             currentDate: date[0]
         })
+        let { users } = this.props;
+        // console.log('tuser in paitent', users);
+        let id = users.id;
+        let { currentDate } = this.state;
+        let dateType = new Date(currentDate).getTime();
+        let res = await getListPatientService({
+            doctorId: id,
+            date: dateType
+        })
+        if (res && res.errCode === 0) {
+            this.setState({
+                dataPatient: res.data
+            })
+        }
+    }
+    sendEmailRemedy = async (item) => {
+        let data = {
+            email: item.patientData.email,
+            doctorId: item.doctorId,
+            patientId: item.patientId,
+            timeType: item.timeTypeDataPatient.valueVi
+        }
+        let res = await sendRemedyService(data);
+        if (res && res.errCode === 0) {
+            toast.success('gửi lời cảm ơn thành công')
+        }
     }
 
-
     render() {
+        let { dataPatient } = this.state;
         return (
             <Fragment>
                 <h3 className="mt-3">
@@ -67,10 +92,46 @@ class PantentManage extends Component {
                             value={this.state.currentDate}
                         />
 
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Thời gian</th>
+                                    <th scope="col">Họ và Tên</th>
+                                    <th scope="col">Địa chỉ</th>
+                                    <th scope="col">Giới tính</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {dataPatient && dataPatient.length > 0 ?
+                                    dataPatient.map((item, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <th scope="row">{index + 1}</th>
+                                                <td>{item.timeTypeDataPatient.valueVi}</td>
+                                                <td>{item.patientData.firstName}</td>
+                                                <td>{item.patientData.address}</td>
+                                                <td>{item.patientData.genderData.valueVi}</td>
+                                                <td>
+                                                    <button className="btn btn-primary btn-up"
+                                                        onClick={() => this.sendEmailRemedy(item)}
+                                                    >Xác nhận</button>
+                                                    <button className="btn btn-success btn-down">Gửi lời cảm ơn </button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                    : <th colspan="6"><h3>KHÔNG CÓ LỊCH HẸN VÀO HÔM NAY</h3></th>
+                                }
+
+
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
-                <div className="container">
-                </div>
+
             </Fragment>
         )
     }
