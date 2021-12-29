@@ -64,11 +64,12 @@ class PantentManage extends Component {
         }
     }
     sendEmailRemedy = async (item) => {
+        console.log('>>>>>>>>>>>>>>>>>>', item)
         let data = {
             email: item.patientData.email,
             doctorId: item.doctorId,
             patientId: item.patientId,
-            timeType: item.timeTypeDataPatient.valueVi
+            timeType: item.timeType
         }
         let res = await sendRemedyService(data);
         if (res && res.errCode === 0) {
