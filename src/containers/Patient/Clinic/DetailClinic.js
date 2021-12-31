@@ -4,9 +4,11 @@ import * as actions from '../../../store/actions/adminAction';
 import Navbar from '../../HomePage/HeaderHome/Navbar';
 import ScheduleDoctor from '../Doctor/ScheduleDoctor';
 import ExtraInforDoctor from '../Doctor/ExtraInforDoctor';
-import ProfileDoctor from '../Doctor/ProfileDoctor'
+import ProfileDoctor from '../Doctor/ProfileDoctor';
+import logo from '../../../assets/hopital.jpg';
 import { getClinicByIdService } from '../../../services/userService'
 import './DetailClinic.scss';
+import Footer from '../../HomePage/FooterHome/FooterHome'
 
 class DetailClinic extends Component {
 
@@ -18,6 +20,7 @@ class DetailClinic extends Component {
             arrClinic: {},
             arrClinicId: [],
             isMore: true,
+            showDes: true,
         }
     }
 
@@ -40,65 +43,110 @@ class DetailClinic extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
-
+    showDes = () => {
+        this.setState({
+            showDes: !this.state.showDes,
+        })
+    }
 
     render() {
-        let { arrClinicId, arrClinic, isMore } = this.state
-        console.log('id specialty in detail specialty', this.state)
+        let { arrClinicId, arrClinic, isMore, showDes } = this.state
+        console.log('id specialty in detail specialty', arrClinic)
+        let imageBase64 = '';
+        if (arrClinic.image) {
+            imageBase64 = new Buffer(arrClinic.image, 'base64').toString('binary');
+            console.log(imageBase64)
+        }
         return (
-            <div className="specialty">
-                <div className=" container ">
-
-                    <Navbar />
-                    <div className="description">
-                        {arrClinic && arrClinic.length > 0 &&
-                            arrClinic.descriptionHTML
-                            ? arrClinic.descriptionHTML :
-                            <div className="container" dangerouslySetInnerHTML={{
-                                __html: arrClinic.descriptionHTML
-                            }}>
-                            </div>
-                        }
+            <>
+                <div className="clinic-header container">
+                    <div className="clinic-header-img">
+                        <img src={imageBase64}></img>
+                    </div>
+                    <div className="clinic-header-name">
+                        <i class="fas fa-hospital-symbol"></i>
+                        Cơ sở y tế:
+                        <span>
+                            {arrClinic && arrClinic.length > 0 ? '' : ' ' + arrClinic.name}
+                        </span>
+                    </div>
+                    <div className="clinic-header-address">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Địa chỉ:
+                        <span>
+                            {arrClinic && arrClinic.length > 0 ? '' : ' ' + arrClinic.address}
+                        </span>
                     </div>
 
-
-                    {arrClinicId && arrClinicId.length > 0 &&
-                        arrClinicId.map((item, index) => {
-                            return (
-                                <div className="sp">
-                                    <div className="sp-left">
-
-                                        <ProfileDoctor
-                                            doctorId={item.doctorId}
-                                            // dataSchedule={dataSchedule}
-                                            showDescription={true}
-                                            isMore={isMore}
-                                        />
-                                    </div>
-                                    <div className="sp-right">
-                                        <div className="sp-right-up">
-                                            <ScheduleDoctor
-                                                doctorId={item.doctorId}
-                                            />
-                                        </div>
-                                        <div className="sp-right-down">
-                                            <ExtraInforDoctor
-                                                doctorId={item.doctorId}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-
-
-
-
-                    <div style={{ height: '10px' }}></div>
+                    <div className="clinic-header-btn"
+                        onClick={() => this.showDes()}
+                    >Đặt lịch khám</div>
                 </div>
-            </div>
+                <div className="clinic">
+                    <div className=" container ">
 
+                        <Navbar />
+
+                        <div className="description">
+                            <div className="des-up"
+                                onClick={() => this.showDes()}
+                            >Giới Thiệu</div>
+                            {
+                                showDes ?
+                                    <div className="des-down">
+                                        {arrClinic && arrClinic.length > 0 &&
+                                            arrClinic.descriptionHTML
+                                            ? arrClinic.descriptionHTML :
+                                            <div className="container" dangerouslySetInnerHTML={{
+                                                __html: arrClinic.descriptionHTML
+                                            }}>
+                                            </div>
+                                        }
+                                    </div>
+                                    : <div className=""></div>
+                            }
+
+
+                        </div>
+
+
+                        {arrClinicId && arrClinicId.length > 0 &&
+                            arrClinicId.map((item, index) => {
+                                return (
+                                    <div className="sp">
+                                        <div className="sp-left">
+
+                                            <ProfileDoctor
+                                                doctorId={item.doctorId}
+                                                // dataSchedule={dataSchedule}
+                                                showDescription={true}
+                                                isMore={isMore}
+                                            />
+                                        </div>
+                                        <div className="sp-right">
+                                            <div className="sp-right-up">
+                                                <ScheduleDoctor
+                                                    doctorId={item.doctorId}
+                                                />
+                                            </div>
+                                            <div className="sp-right-down">
+                                                <ExtraInforDoctor
+                                                    doctorId={item.doctorId}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+
+
+
+
+                    </div>
+                </div>
+                <Footer></Footer>
+            </>
         );
     }
 

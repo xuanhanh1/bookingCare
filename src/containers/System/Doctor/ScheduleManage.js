@@ -31,15 +31,12 @@ class ScheduleManage extends Component {
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.allDoctors !== this.props.allDoctors) {
-            // console.log(this.props.allDoctors)
             let dataInput = this.inputSeclectData(this.props.allDoctors)
-            // console.log(dataInput)
             this.setState({
                 listDoctors: dataInput
             })
         }
         if (prevProps.allschedule !== this.props.allschedule) {
-            // console.log(this.props.allschedule)
             let data = this.props.allschedule;
             if (data && data.length > 0) {
                 data = data.map(item => ({ ...item, isSelected: false }))
@@ -87,7 +84,6 @@ class ScheduleManage extends Component {
         }
     }
     saveSchedule = async () => {
-        // console.log('Saving schedule state', this.state)
         let { scheduleTime, currentDate, selectedOption } = this.state
         let result = [];
         if (!currentDate) {
@@ -96,7 +92,6 @@ class ScheduleManage extends Component {
         if (selectedOption && _.isEmpty(selectedOption)) {
             toast.error("not chose doctor")
         }
-        // let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
         let formatedDate = new Date(currentDate).getTime();
 
         if (scheduleTime && scheduleTime.length > 0) {
@@ -121,16 +116,16 @@ class ScheduleManage extends Component {
             doctorId: selectedOption.value,
             date: formatedDate
         })
-        console.log('luu thong tin schedule time', result)
-        // console.log('saveBulkScheduleService data', res)
+        if (res && res.errCode === 0) {
+            toast.success("Đặt lịch thành công")
+        }
+
     }
 
     render() {
         let { scheduleTime } = this.state;
         let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
         let { allschedule } = this.props;
-        // console.log(scheduleTime)
-        // console.log(allschedule.valueEn)
         return (
             <Fragment>
                 <h3 className="mt-3">
@@ -161,7 +156,6 @@ class ScheduleManage extends Component {
                     <div className="schedule-time">
                         {scheduleTime && scheduleTime.length > 0 &&
                             scheduleTime.map((item, i) => {
-                                // console.log(item)
                                 return (
                                     <button key={i} className={item.isSelected === true ? 'btn-schedule active' : 'btn-schedule'}
                                         onClick={() => this.onHandleClickBtnTime(item)}

@@ -13,6 +13,9 @@ class Navbar extends Component {
     goHomePage = () => {
         this.props.history.push(`/home`)
     }
+    goLoginDoctor = () => {
+        this.props.history.push(`/login`)
+    }
     render() {
         return (
             <div className="header">
@@ -42,7 +45,7 @@ class Navbar extends Component {
                         </div>
                     </div>
                     <div className="login">
-                        <a href> Đăng nhập/ đăng ký</a>
+                        <a onClick={() => this.goLoginDoctor()} > Đăng nhập</a>
                     </div>
                 </div>
             </div>
