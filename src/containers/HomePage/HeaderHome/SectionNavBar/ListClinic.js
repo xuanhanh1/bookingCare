@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Navbar from '../Navbar'
 
-class Doctor extends Component {
+class ListClinic extends Component {
     constructor(props) {
         super(props);
 
@@ -76,4 +76,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Doctor));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListClinic));
