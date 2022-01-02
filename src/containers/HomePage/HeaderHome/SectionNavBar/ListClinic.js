@@ -4,7 +4,7 @@ import * as actions from '../../../../store/actions/adminAction';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Navbar from '../Navbar'
-
+import Footer from '../../FooterHome/FooterHome'
 
 class ListClinic extends Component {
 
@@ -56,7 +56,7 @@ class ListClinic extends Component {
                     })}
 
                 </section >
-
+                <Footer />
             </>
 
         )

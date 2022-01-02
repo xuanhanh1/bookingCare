@@ -3,7 +3,9 @@ import './ListNavBar.scss';
 import * as actions from '../../../../store/actions/adminAction';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import Navbar from '../Navbar'
+import Navbar from '../Navbar';
+import Footer from '../../FooterHome/FooterHome'
+
 
 class ListSpecialty extends Component {
     constructor(props) {
@@ -35,6 +37,7 @@ class ListSpecialty extends Component {
         return (
             <>
                 <Navbar />
+
                 < section className="section container" >
                     <div className="section__header title">
                         <h3>Danh sách chuyên khoa</h3>
@@ -53,6 +56,7 @@ class ListSpecialty extends Component {
                     })}
 
                 </section >
+                <Footer />
             </>
 
         )
