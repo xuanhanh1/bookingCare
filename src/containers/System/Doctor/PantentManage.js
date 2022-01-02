@@ -75,6 +75,22 @@ class PantentManage extends Component {
         if (res && res.errCode === 0) {
             toast.success('gửi lời cảm ơn thành công')
         }
+
+        //load laij danh sachs 
+        let { users } = this.props;
+        // console.log('tuser in paitent', users);
+        let id = users.id;
+        let { currentDate } = this.state;
+        let dateType = new Date(currentDate).getTime();
+        let res1 = await getListPatientService({
+            doctorId: id,
+            date: dateType
+        })
+        if (res1 && res1.errCode === 0) {
+            this.setState({
+                dataPatient: res1.data
+            })
+        }
     }
 
     render() {
@@ -118,7 +134,7 @@ class PantentManage extends Component {
                                                     <button className="btn btn-primary btn-up"
                                                         onClick={() => this.sendEmailRemedy(item)}
                                                     >Xác nhận</button>
-                                                    <button className="btn btn-success btn-down">Gửi lời cảm ơn </button>
+
                                                 </td>
                                             </tr>
                                         )

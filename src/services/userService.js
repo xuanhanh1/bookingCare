@@ -32,7 +32,7 @@ const getAInfoDoctorService = (inputId) => {
 
 const createInfoDoctorService = (data) => {
     // console.log('check data server ' + data);
-    alert('crate info doctor success');
+    toast.success('crate info doctor success');
     return axios.post('/api/save-info-doctors', data);
 }
 
