@@ -35,7 +35,16 @@ class Doctor extends Component {
         console.log("all doctor ne: ", listDoctors)
         return (
             <>
+                <Navbar />
+                < section className="section container" >
+                    <div className="section__header title">
+                        <h3>Danh sách phòng khám</h3>
+                    </div>
+
+
+                </section >
             </>
+
         )
     }
 }
