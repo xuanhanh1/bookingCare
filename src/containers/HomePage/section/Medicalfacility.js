@@ -31,6 +31,10 @@ class Medicalfacility extends Component {
         this.props.history.push(`/clinicDetail/${clinic}`)
 
     }
+
+    goListClinic = () => {
+        this.props.history.push(`/clinices`)
+    }
     render() {
         var settings = {
             infinite: false,
@@ -74,7 +78,7 @@ class Medicalfacility extends Component {
                 {/* <h1 className="section_heading">Chuyên khoa phổ biến</h1> */}
                 <div className="section__header">
                     <h3>Cơ sở y tế nổi bật</h3>
-                    <button>Xem Thêm</button>
+                    <button onClick={() => this.goListClinic()}>Xem Thêm</button>
                 </div>
                 <Slider {...settings}>
                     {arrClinic && arrClinic.length > 0 &&

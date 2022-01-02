@@ -35,6 +35,9 @@ class Doctor extends Component {
         this.props.history.push(`/doctorDetail/${doctor}`)
 
     }
+    goListDoctor = () => {
+        this.props.history.push(`/doctors`)
+    }
     render() {
         var settings = {
             infinite: false,
@@ -49,7 +52,7 @@ class Doctor extends Component {
             <section className="special section container" >
                 <div className="section__header">
                     <h3>Bác sĩ nổi bật</h3>
-                    <button>Xem Thêm</button>
+                    <button onClick={() => this.goListDoctor()}>Xem Thêm</button>
                 </div>
                 <div className="sections-content">
                     <Slider {...settings}>
@@ -59,6 +62,7 @@ class Doctor extends Component {
                                 imageBase64 = new Buffer(item.image, 'base64').toString('binary');
                                 // console.log(imageBase64)
                             }
+                            let name = `${item.lastName} ${item.firstName}`
                             console.log(item)
                             return (
                                 <div className="sections-content-img doctor-img"
@@ -66,7 +70,7 @@ class Doctor extends Component {
                                 >
                                     <img src={imageBase64}></img>
                                     <h3> </h3>
-                                    <h4> {item.lastName}</h4>
+                                    <h4>Bác sĩ {name}</h4>
                                     {/* <span>Co xuong khop</span> */}
                                 </div>
                             )

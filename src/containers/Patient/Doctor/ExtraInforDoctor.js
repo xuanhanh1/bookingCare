@@ -55,9 +55,9 @@ class ExtraInforDoctor extends Component {
         return (
             <div className="doctor-extra container">
                 <div className="content-up">
-                    <h2>ĐỊA CHỈ KHÁM</h2>
-                    <div>{dataExtraInfo.nameClinic}</div>
-                    <div>{dataExtraInfo.addressClinic}</div>
+                    <h3><b>ĐỊA CHỈ KHÁM </b></h3>
+                    <div className='extra-info'>{dataExtraInfo.nameClinic}</div>
+                    <div className='extra-info'>{dataExtraInfo.addressClinic}</div>
                 </div>
                 <div className="content-down">
                     <div className="content-down-left"><b>Giá khám:

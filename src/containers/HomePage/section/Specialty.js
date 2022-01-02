@@ -30,6 +30,10 @@ class Specialty extends Component {
         this.props.history.push(`/specialtyDetail/${specialty}`)
 
     }
+
+    goListSpecialty = () => {
+        this.props.history.push(`/specialties`)
+    }
     render() {
         var settings = {
             infinite: false,
@@ -72,7 +76,7 @@ class Specialty extends Component {
                 {/* <h1 className="section_heading">Chuyên khoa phổ biến</h1> */}
                 <div className="section__header">
                     <h3>Chuyên khoa phổ biến</h3>
-                    <button>Xem Thêm</button>
+                    <button onClick={() => this.goListSpecialty()}>Xem Thêm</button>
                 </div>
                 <Slider {...settings}>
                     {arrSpectials && arrSpectials.length > 0 &&
@@ -84,7 +88,7 @@ class Specialty extends Component {
                                     <div className="card">
                                         <div className="card-img-top card-img" style={{ backgroundImage: `url(${item.image})` }}></div>
                                         <div className="card-body">
-                                            <h5 className="card-title">{item.name}</h5>
+                                            <h5 className="card-title">Chuyên khoa {item.name}</h5>
                                         </div>
                                     </div>
                                 </div>

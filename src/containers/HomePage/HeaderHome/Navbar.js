@@ -17,11 +17,11 @@ class Navbar extends Component {
         this.props.history.push(`/login`)
     }
 
-    goListClinic = () => {
+    goListSpecialty = () => {
         this.props.history.push(`/specialties`)
     }
 
-    goListSpecialty = () => {
+    goListClinic = () => {
         this.props.history.push(`/clinices`)
     }
 
@@ -40,11 +40,11 @@ class Navbar extends Component {
                         </a>
                     </div>
                     <div className="content">
-                        <div className="content_children" onClick={() => this.goListClinic()}>
+                        <div className="content_children" onClick={() => this.goListSpecialty()}>
                             <p> <b>Chuyên Khoa</b> </p>
                             Tìm bác sĩ theo chuyên khoa
                         </div>
-                        <div className="content_children" onClick={() => this.goListSpecialty()}>
+                        <div className="content_children" onClick={() => this.goListClinic()}>
                             <p> <b>Cơ sở y tế</b> </p>
                             Chọn bệnh viện phòng khám
                         </div>
@@ -58,7 +58,7 @@ class Navbar extends Component {
                         </div>
                     </div>
                     <div className="login">
-                        <a onClick={() => this.goLoginDoctor()} > Đăng nhập</a>
+                        <a onClick={() => this.goLoginDoctor()} > Đăng nhập/ Đăng kí</a>
                     </div>
                 </div>
             </div>

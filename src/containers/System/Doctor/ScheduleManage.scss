@@ -1,54 +1,64 @@
-.select{
-    display: grid;
+.select {
+    display              : grid;
     grid-template-columns: 1fr 1fr;
-    justify-content: space-between;
-    gap: 20px;
-    margin-top: 20px;
-    &-doctor{
-        Select{
+    justify-content      : space-between;
+    gap                  : 20px;
+    margin-top           : 20px;
+
+    &-doctor {
+        Select {
             width: 80%;
         }
     }
-    &-data{
+
+    &-data {
         width: 100%;
-        label{
+
+        label {
             display: block;
         }
-        input{
+
+        input {
             width: 80%;
         }
     }
 }
-.schedule{
-    margin-top: 20px;
+
+.schedule {
+    margin-top   : 20px;
     margin-bottom: 20px;
-    &-time{
-        display: grid;
+
+    &-time {
+        display              : grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        justify-content: space-between;
-        gap: 20px;
+        grid-template-rows   : 1fr 1fr;
+        justify-content      : space-between;
+        gap                  : 20px;
     }
-    button{
-        padding: 5px;
-        margin: 5px;
+
+    button {
+        padding         : 5px;
+        margin          : 5px;
         background-color: white;
-        &:hover{
-            opacity: 0.8;
+
+        &:hover {
+            opacity         : 0.8;
             background-color: rgb(160, 160, 245);
         }
     }
 }
-.btn-save{
-    padding: 5px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 5px;
+
+.btn-save {
+    padding         : 5px;
+    margin          : 5px;
+    cursor          : pointer;
+    border-radius   : 5px;
     background-color: #5252ff;
-    color: white;
+    color           : white;
 }
-.btn-schedule{
-    &.active{
+
+.btn-schedule {
+    &.active {
         background-color: orange;
     }
 }

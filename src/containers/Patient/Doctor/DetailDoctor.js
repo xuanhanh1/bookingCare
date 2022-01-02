@@ -69,7 +69,7 @@ class DetailDoctor extends Component {
                             <img src={data.image}></img>
                         </div>
                         <div className="doctor-header-content">
-                            <h2>Giao su tien si <span>{title}</span></h2>
+                            <h2>Giáo sư, tiến sĩ <span>{title}</span></h2>
                             <p> {description} </p>
                         </div>
                     </div>
@@ -99,7 +99,7 @@ class DetailDoctor extends Component {
                 </div>
 
 
-                <div style={{ height: '10px', backgroundColor: '#a5e0f1' }}></div>
+                {/* <div style={{ height: '10px', backgroundColor: '#a5e0f1' }}></div> */}
                 <Footer></Footer>
             </div>
         );

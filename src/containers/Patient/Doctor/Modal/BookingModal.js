@@ -203,10 +203,10 @@ class BookingModal extends Component {
                         </div>
                     </div>
                     <div className="modal-footer booking-modal-footer">
-                        <button className="btn btn-primary"
+                        <button className="btn btn-primary btn-modal"
                             onClick={() => this.saveBookingModal()}
                         >Xác nhận </button>
-                        <button className="btn btn-danger"
+                        <button className="btn btn-danger btn-modal"
                             onClick={closeBookingModal}
                         >Cancel </button>
                     </div>

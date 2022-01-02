@@ -47,24 +47,24 @@ class UsersTable extends Component {
                     <table class="table table-bordered">
                         <thead>
                             <tr className="bg-success">
-                                <th scope="col">#</th>
-                                <th scope="col">Email</th>
+                                <th className='th-font' scope="col">#</th>
+                                <th className='th-font' scope="col">Email</th>
 
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Actions</th>
+                                <th className='th-font' scope="col">First Name</th>
+                                <th className='th-font' scope="col">Last Name</th>
+                                <th className='th-font' scope="col">Address</th>
+                                <th className='th-font' scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {users.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <th scope="row">{index + 1}</th>
-                                        <td>{item.email}</td>
-                                        <td>{item.firstName}</td>
-                                        <td>{item.lastName}</td>
-                                        <td>{item.address}</td>
+                                        <th className='td-font' scope="row">{index + 1}</th>
+                                        <td className='td-font'>{item.email}</td>
+                                        <td className='td-font'>{item.firstName}</td>
+                                        <td className='td-font'>{item.lastName}</td>
+                                        <td className='td-font'>{item.address}</td>
                                         <td>
                                             <i className="fas fa-edit"
                                                 onClick={() => this.editUsers(item)}
