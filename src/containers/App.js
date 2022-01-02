@@ -64,6 +64,7 @@ class App extends Component {
                                     <Route path={path.SPECIALTYID} component={(DetailSpecialty)} />
                                     <Route path={path.CLINICID} component={(DetailClinic)} />
                                     <Route path={path.LISTDOCTOR} component={(ListDoctor)} />
+                                    <Route path={path.LISTCLINIC} component={(ListClinic)} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>
