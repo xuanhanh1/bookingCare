@@ -16,6 +16,10 @@ class Navbar extends Component {
     goLoginDoctor = () => {
         this.props.history.push(`/login`)
     }
+
+    goListDoctor = () => {
+        this.props.history.push(`/doctors`)
+    }
     render() {
         return (
             <div className="header">
@@ -35,7 +39,7 @@ class Navbar extends Component {
                             <p> <b>Cơ sở y tế</b> </p>
                             Chọn bệnh viện phòng khám
                         </div>
-                        <div className="content_children">
+                        <div className="content_children" onClick={() => this.goListDoctor()}>
                             <p> <b>Bác sĩ</b> </p>
                             Chọn bác sĩ giỏi
                         </div>
