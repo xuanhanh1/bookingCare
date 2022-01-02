@@ -4,94 +4,59 @@ import * as actions from '../../../../store/actions/adminAction';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Navbar from '../Navbar'
-<<<<<<< HEAD
-import FooterHome from '../../FooterHome/FooterHome'
 
-class Doctor extends Component {
-=======
 
 class ListClinic extends Component {
->>>>>>> b814dca835d64f8eb27d726711c53479b380b8a7
+
     constructor(props) {
         super(props);
 
         this.state = {
-            listDoctors: [],
+            listClinic: [],
         }
     }
 
     componentDidMount() {
-        this.props.getAllDoctor();
+        this.props.getClinic();
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.allDoctors !== this.props.allDoctors) {
+        if (prevProps.clinic !== this.props.clinic) {
             this.setState({
-                listDoctors: this.props.allDoctors
+                listClinic: this.props.clinic
             })
         }
 
     }
-    handerViewDetailDoctor = (doctor) => {
+    handerViewDetailClinic = (clinic) => {
         // console.log(doctor)
-        this.props.history.push(`/doctorDetail/${doctor}`)
+        this.props.history.push(`/clinicDetail/${clinic}`)
 
     }
     render() {
-        let listDoctors = this.state.listDoctors;
-        console.log("all doctor ne: ", listDoctors)
+        let listClinic = this.state.listClinic;
+        console.log("all doctor ne: ", listClinic)
         return (
             <>
                 <Navbar />
                 < section className="section container" >
-<<<<<<< HEAD
-                    <div className='body-list'>
-                        <div className="section__header title">
-                            <h3>Danh sách bác sĩ</h3>
-                        </div>
 
-                        {listDoctors.map((item, index) => {
-                            let imageBase64 = '';
-                            if (item.image) {
-                                imageBase64 = new Buffer(item.image, 'base64').toString('binary');
-                            }
-                            let name = `${item.lastName} ${item.firstName}`
-                            console.log(item)
-                            return (
-                                <div className="sections-content list-nav"
-                                    onClick={() => { this.handerViewDetailDoctor(item.id) }}
-                                >
-                                    < img className='avatar' src={imageBase64} alt="" />
-                                    <p className='name'> Bác sĩ {name}</p>
-                                </div>
-                            )
-                        })}
-                    </div>
-                </section >
-                <FooterHome />
-
-=======
                     <div className="section__header title">
                         <h3>Danh sách phòng khám</h3>
                     </div>
-                    {listDoctors.map((item, index) => {
-                        let imageBase64 = '';
-                        if (item.image) {
-                            imageBase64 = new Buffer(item.image, 'base64').toString('binary');
-                        }
-                        let name = `${item.lastName} ${item.firstName}`
-                        console.log(item)
+                    {listClinic.map((item, index) => {
+
                         return (
                             <div className="sections-content list-nav"
-                                onClick={() => { this.handerViewDetailDoctor(item.id) }}
+                                onClick={() => { this.handerViewDetailClinic(item.id) }}
                             >
-                                < img className='avatar' src={imageBase64} alt="" />
-                                <p className='name'> Bác sĩ {name}</p>
+                                < img className='avatar' src={item.image} alt="" />
+                                <p className='name'>{item.name}</p>
                             </div>
                         )
                     })}
 
                 </section >
->>>>>>> b814dca835d64f8eb27d726711c53479b380b8a7
+
             </>
 
         )
@@ -100,18 +65,16 @@ class ListClinic extends Component {
 
 const mapStateToProps = state => {
     return {
-        allDoctors: state.admin.allDoctors
+        clinic: state.admin.clinic
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllDoctor: () => dispatch(actions.getAllDoctor()),
+        getClinic: () => dispatch(actions.getClinic()),
     };
 };
 
-<<<<<<< HEAD
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Doctor));
-=======
+
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListClinic));
->>>>>>> b814dca835d64f8eb27d726711c53479b380b8a7
+
