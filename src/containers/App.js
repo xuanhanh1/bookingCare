@@ -18,7 +18,9 @@ import Login from '../containers/Auth/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
 import Doctor from '../routes/Doctor';
-import ListDoctor from '../containers/HomePage/HeaderHome/SectionNavBar/ListDoctor'
+import ListDoctor from '../containers/HomePage/HeaderHome/SectionNavBar/ListDoctor';
+import ListClinic from '../containers/HomePage/HeaderHome/SectionNavBar/ListClinic';
+import ListSpecialty from '../containers/HomePage/HeaderHome/SectionNavBar/ListSpecialty';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
 import CustomScrollbars from '../components/CustomScrollbars';
@@ -65,6 +67,7 @@ class App extends Component {
                                     <Route path={path.CLINICID} component={(DetailClinic)} />
                                     <Route path={path.LISTDOCTOR} component={(ListDoctor)} />
                                     <Route path={path.LISTCLINIC} component={(ListClinic)} />
+                                    <Route path={path.LISTSPECIALTY} component={(ListSpecialty)} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

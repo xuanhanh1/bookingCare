@@ -9,7 +9,8 @@ export const path = {
     CLINICID: '/clinicDetail/:id',
     DOCTOR: '/doctor',
     LISTDOCTOR: '/doctors',
-    LISTCLINIC: '/clinices'
+    LISTCLINIC: '/clinices',
+    LISTSPECIALTY: '/specialties'
 };
 
 export const languages = {
