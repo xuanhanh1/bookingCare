@@ -109,7 +109,9 @@ class DetailClinic extends Component {
 
                         </div>
 
+                        <div className="book-up"
 
+                        >Đặt lịch khám</div>
                         {arrClinicId && arrClinicId.length > 0 &&
                             arrClinicId.map((item, index) => {
                                 return (
@@ -139,10 +141,6 @@ class DetailClinic extends Component {
                                 )
                             })
                         }
-
-
-
-
                     </div>
                 </div>
                 <Footer></Footer>
