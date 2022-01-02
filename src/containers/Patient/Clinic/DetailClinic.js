@@ -61,7 +61,7 @@ class DetailClinic extends Component {
             <>
                 <div className="clinic-header container">
                     <div className="clinic-header-img">
-                        <img src={imageBase64}></img>
+                        <div className="bgr-clinic" style={{ backgroundImage: `url(${imageBase64})` }}></div>
                     </div>
                     <div className="clinic-header-name">
                         <i class="fas fa-hospital-symbol"></i>
