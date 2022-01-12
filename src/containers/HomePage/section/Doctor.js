@@ -62,7 +62,7 @@ class Doctor extends Component {
                                 imageBase64 = new Buffer(item.image, 'base64').toString('binary');
                                 // console.log(imageBase64)
                             }
-                            let name = `${item.lastName} ${item.firstName}`
+                            let name = `${item.firstName} ${item.lastName}`
                             console.log(item)
                             return (
                                 <div className="sections-content-img doctor-img"

@@ -5,7 +5,8 @@ import Navbar from '../../HomePage/HeaderHome/Navbar';
 import ScheduleDoctor from '../Doctor/ScheduleDoctor';
 import ExtraInforDoctor from '../Doctor/ExtraInforDoctor';
 import ProfileDoctor from '../Doctor/ProfileDoctor'
-import { getSpecialtyByIdService } from '../../../services/userService'
+import { getSpecialtyByIdService } from '../../../services/userService';
+import Footer from '../../HomePage/FooterHome/FooterHome'
 import './DetailSpecialty.scss';
 
 class DetailSpecialty extends Component {
@@ -95,6 +96,7 @@ class DetailSpecialty extends Component {
 
                     <div style={{ height: '100px' }}></div>
                 </div>
+                <Footer></Footer>
             </div>
 
         );
